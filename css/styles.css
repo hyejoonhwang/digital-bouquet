@@ -58,10 +58,11 @@ body {
     justify-content: flex-end;
     background: transparent;
     box-shadow: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
-    left: 0;
+    left: auto;
+    z-index: 100;
 }
 
 .logo {
@@ -134,11 +135,12 @@ body {
 
 /* Canvas Container */
 .canvas-container {
-    width: 1500px;
-    height: 1500px;
-    max-width: 90vw;
-    max-height: calc(100vh - 280px);
-    aspect-ratio: 1 / 1;
+    width: calc(100vh - 300px);
+    height: calc(100vh - 300px);
+    min-width: 300px;
+    min-height: 300px;
+    max-width: 1500px;
+    max-height: 1500px;
 }
 
 .canvas {
