@@ -17,25 +17,25 @@ const BouquetState = {
     // Constants
     MAX_FLOWERS: 20,
 
-    // Flower colors mapping (minimal gray for wireframe)
+    // Flower colors mapping
     flowerColors: {
-        1: '#888888',
-        2: '#888888',
-        3: '#888888',
-        4: '#888888',
-        5: '#888888',
-        6: '#888888',
-        7: '#888888',
-        8: '#888888',
-        9: '#888888',
-        10: '#888888'
+        1: '#FF6B6B',
+        2: '#FF8E53',
+        3: '#FFCD38',
+        4: '#6BCB77',
+        5: '#4D96FF',
+        6: '#9B59B6',
+        7: '#E91E63',
+        8: '#00BCD4',
+        9: '#FF5722',
+        10: '#8BC34A'
     },
 
-    // Wrapper backgrounds (minimal gray)
+    // Wrapper gradients
     wrapperGradients: {
-        1: '#d9d9d9',
-        2: '#c0c0c0',
-        3: '#a8a8a8'
+        1: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        2: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+        3: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
     },
 
     // Generate unique ID

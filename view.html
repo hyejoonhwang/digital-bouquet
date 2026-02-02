@@ -10,24 +10,25 @@
     <div class="app view-app">
         <!-- Envelope View (Initial) -->
         <div class="envelope-view" id="envelopeView">
-            <h1 class="gift-title">You received a bouquet!</h1>
+            <h1 class="gift-title">You received a bouquet! 💐</h1>
 
             <div class="envelope-container" id="envelopeContainer">
                 <div class="envelope" id="envelope">
                     <div class="envelope-flap"></div>
                     <div class="envelope-body">
-                        <span class="envelope-icon">✉</span>
+                        <span class="envelope-icon">💌</span>
                     </div>
                 </div>
             </div>
 
-            <p class="open-hint">Click to open your gift</p>
+            <p class="open-hint">Click the envelope to open your gift</p>
         </div>
 
         <!-- Revealed Content (After clicking envelope) -->
         <div class="revealed-view hidden" id="revealedView">
             <header class="header">
-                <button class="btn" id="createOwnBtn">create new</button>
+                <div class="logo">🌸 A Digital Bouquet for You</div>
+                <button class="btn btn-primary" id="createOwnBtn">Create Your Own</button>
             </header>
 
             <main class="revealed-content">
@@ -38,9 +39,9 @@
                     </div>
 
                     <!-- Letter -->
-                    <div class="revealed-section">
-                        <div class="revealed-postcard">
-                            <p class="revealed-postcard-content" id="revealedLetter"></p>
+                    <div class="revealed-letter-section">
+                        <div class="letter-paper revealed-letter">
+                            <p class="letter-content" id="revealedLetter"></p>
                         </div>
                     </div>
                 </div>
@@ -50,9 +51,10 @@
         <!-- Expired/Error View -->
         <div class="error-view hidden" id="errorView">
             <div class="error-container">
-                <h2>This bouquet has expired</h2>
+                <div class="error-icon">🥀</div>
+                <h2>Oops! This bouquet has wilted</h2>
                 <p>This link has expired or doesn't exist.</p>
-                <button class="btn" id="createNewBtn">create new</button>
+                <button class="btn btn-primary" id="createNewBtn">Create a New Bouquet</button>
             </div>
         </div>
     </div>
