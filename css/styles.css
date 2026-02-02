@@ -53,6 +53,17 @@ body {
     z-index: 100;
 }
 
+/* Minimal header - just button on right */
+.header-minimal {
+    justify-content: flex-end;
+    background: transparent;
+    box-shadow: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
 .logo {
     font-size: 1.25rem;
     font-weight: 600;
@@ -99,10 +110,17 @@ body {
     padding: 20px;
 }
 
+/* Landing page specific layout */
+.landing-page .main-content {
+    flex-direction: column;
+    padding-top: 60px;
+    gap: 24px;
+}
+
 /* Canvas Container */
 .canvas-container {
     width: 100%;
-    max-width: 500px;
+    max-width: 300px;
     aspect-ratio: 3 / 4;
 }
 
@@ -110,10 +128,9 @@ body {
     width: 100%;
     height: 100%;
     background: var(--wrapper-1);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-lg);
     position: relative;
     overflow: hidden;
+    /* No border-radius or shadow - canvas IS the wrapper */
 }
 
 .canvas-placeholder {
@@ -126,6 +143,69 @@ body {
     text-align: center;
     pointer-events: none;
     padding: 20px;
+}
+
+/* Action Icons (undo/shuffle/redo) */
+.action-icons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border-color);
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.icon-btn:hover {
+    background: #f0f0f0;
+}
+
+/* Tabs for landing page */
+.landing-page .tabs {
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 24px;
+}
+
+.landing-page .tab {
+    background: var(--border-color);
+    color: var(--text-primary);
+    padding: 6px 16px;
+    font-size: 1rem;
+}
+
+.landing-page .tab.active {
+    background: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Palette Container */
+.palette-container {
+    width: 100%;
+    max-width: 800px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 16px;
+    margin: 0 24px;
+}
+
+.palette-slider {
+    width: 50%;
+    height: 4px;
+    background: var(--border-color);
+    border-radius: 2px;
+    margin-top: 12px;
 }
 
 /* Placed Flowers on Canvas */
@@ -171,7 +251,7 @@ body {
     display: flex;
 }
 
-/* Bottom Panel */
+/* Bottom Panel (for other pages) */
 .bottom-panel {
     background: var(--surface);
     padding: 16px 24px;
@@ -187,6 +267,7 @@ body {
     gap: 12px;
 }
 
+/* Tabs */
 .tabs {
     display: flex;
     gap: 8px;
@@ -226,9 +307,8 @@ body {
 /* Palette */
 .palette {
     display: flex;
-    gap: 12px;
+    gap: 8px;
     flex-wrap: wrap;
-    padding: 8px 0;
 }
 
 .palette.hidden {
@@ -236,47 +316,29 @@ body {
 }
 
 .palette-item {
-    width: 50px;
-    height: 50px;
-    border-radius: var(--radius-sm);
+    width: 80px;
+    height: 100px;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: var(--shadow);
+    transition: transform 0.2s ease;
+    border: 1px solid var(--border-color);
 }
 
 .palette-item:hover {
-    transform: scale(1.1);
-    box-shadow: var(--shadow-lg);
+    transform: scale(1.05);
 }
 
 .palette-item.flower {
-    border-radius: 50%;
+    border-radius: 0;
 }
 
 .palette-item.wrapper {
     width: 80px;
-    height: 60px;
-    border: 3px solid transparent;
+    height: 100px;
+    border: 1px solid var(--border-color);
 }
 
 .palette-item.wrapper.selected {
-    border-color: var(--primary-color);
-}
-
-.flower-count {
-    margin-top: 12px;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-}
-
-.flower-count.warning {
-    color: #ff9800;
-    font-weight: 500;
-}
-
-.flower-count.limit {
-    color: #f44336;
-    font-weight: 500;
+    border: 3px solid var(--primary-color);
 }
 
 /* ===== LETTER PAGE ===== */
@@ -680,13 +742,25 @@ body {
     }
 
     .palette-item {
-        width: 45px;
-        height: 45px;
+        width: 60px;
+        height: 80px;
     }
 
     .palette-item.wrapper {
-        width: 70px;
-        height: 50px;
+        width: 60px;
+        height: 80px;
+    }
+
+    .palette-container {
+        margin: 0 16px;
+    }
+
+    .landing-page .tabs {
+        padding: 0 16px;
+    }
+
+    .canvas-container {
+        max-width: 250px;
     }
 }
 
@@ -707,6 +781,11 @@ body {
 
     .main-content {
         padding: 12px;
+    }
+
+    .landing-page .main-content {
+        padding-top: 50px;
+        gap: 16px;
     }
 
     .bottom-panel {
@@ -733,13 +812,24 @@ body {
     }
 
     .palette-item {
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 70px;
+    }
+
+    .palette-item.wrapper {
+        width: 50px;
+        height: 70px;
     }
 
     .placed-flower {
         width: 40px;
         height: 40px;
+    }
+
+    .icon-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
     }
 
     .gift-title {
@@ -760,17 +850,25 @@ body {
     .letter-textarea {
         min-height: 200px;
     }
+
+    .canvas-container {
+        max-width: 220px;
+    }
 }
 
 /* Very small screens */
 @media (max-width: 320px) {
     .palette-item {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 60px;
     }
 
     .placed-flower {
         width: 35px;
         height: 35px;
+    }
+
+    .canvas-container {
+        max-width: 180px;
     }
 }

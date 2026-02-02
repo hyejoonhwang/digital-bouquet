@@ -3,63 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Bouquet - Create Your Bouquet</title>
+    <title>Digital Bouquet</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="app">
-        <!-- Header -->
-        <header class="header">
-            <div class="logo">🌸 Digital Bouquet</div>
-            <button class="btn btn-primary" id="createBtn">Create →</button>
+    <div class="app landing-page">
+        <!-- Header - just create button -->
+        <header class="header header-minimal">
+            <button class="btn btn-primary" id="createBtn">create</button>
         </header>
 
-        <!-- Main Canvas Area -->
+        <!-- Main Content -->
         <main class="main-content">
+            <!-- Canvas/Wrapper Area -->
             <div class="canvas-container">
                 <div class="canvas" id="canvas">
-                    <div class="canvas-placeholder">Drag flowers here to create your bouquet</div>
+                    <div class="canvas-placeholder">Drag flowers here</div>
                 </div>
+            </div>
+
+            <!-- Action Buttons (below canvas) -->
+            <div class="action-icons">
+                <button class="icon-btn" id="undoBtn" title="Undo">↩</button>
+                <button class="icon-btn" id="shuffleBtn" title="Shuffle">⟳</button>
+                <button class="icon-btn" id="redoBtn" title="Redo">↪</button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" data-tab="flowers">flower</button>
+                <button class="tab" data-tab="wrapper">wrapper</button>
+            </div>
+
+            <!-- Palette Container -->
+            <div class="palette-container">
+                <!-- Flowers Palette -->
+                <div class="palette" id="flowersPalette">
+                    <div class="palette-item flower" data-type="1" style="background: #FF6B6B;" draggable="true"></div>
+                    <div class="palette-item flower" data-type="2" style="background: #FF8E53;" draggable="true"></div>
+                    <div class="palette-item flower" data-type="3" style="background: #FFCD38;" draggable="true"></div>
+                    <div class="palette-item flower" data-type="4" style="background: #6BCB77;" draggable="true"></div>
+                    <div class="palette-item flower" data-type="5" style="background: #4D96FF;" draggable="true"></div>
+                    <div class="palette-item flower" data-type="6" style="background: #9B59B6;" draggable="true"></div>
+                    <div class="palette-item flower" data-type="7" style="background: #E91E63;" draggable="true"></div>
+                    <div class="palette-item flower" data-type="8" style="background: #00BCD4;" draggable="true"></div>
+                    <div class="palette-item flower" data-type="9" style="background: #FF5722;" draggable="true"></div>
+                    <div class="palette-item flower" data-type="10" style="background: #8BC34A;" draggable="true"></div>
+                </div>
+
+                <!-- Wrapper Palette -->
+                <div class="palette hidden" id="wrapperPalette">
+                    <div class="palette-item wrapper" data-wrapper="1" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                    <div class="palette-item wrapper" data-wrapper="2" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                    <div class="palette-item wrapper" data-wrapper="3" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                </div>
+
+                <!-- Slider placeholder -->
+                <div class="palette-slider"></div>
             </div>
         </main>
-
-        <!-- Bottom Panel -->
-        <footer class="bottom-panel">
-            <div class="panel-header">
-                <div class="tabs">
-                    <button class="tab active" data-tab="flowers">Flowers</button>
-                    <button class="tab" data-tab="wrapper">Wrapper</button>
-                </div>
-                <div class="action-buttons">
-                    <button class="btn btn-secondary" id="shuffleBtn">🔀 Shuffle</button>
-                    <button class="btn btn-secondary" id="undoBtn">↩ Undo</button>
-                    <button class="btn btn-secondary" id="redoBtn">↪ Redo</button>
-                </div>
-            </div>
-
-            <!-- Flowers Palette -->
-            <div class="palette" id="flowersPalette">
-                <div class="palette-item flower" data-type="1" style="background: #FF6B6B;" draggable="true"></div>
-                <div class="palette-item flower" data-type="2" style="background: #FF8E53;" draggable="true"></div>
-                <div class="palette-item flower" data-type="3" style="background: #FFCD38;" draggable="true"></div>
-                <div class="palette-item flower" data-type="4" style="background: #6BCB77;" draggable="true"></div>
-                <div class="palette-item flower" data-type="5" style="background: #4D96FF;" draggable="true"></div>
-                <div class="palette-item flower" data-type="6" style="background: #9B59B6;" draggable="true"></div>
-                <div class="palette-item flower" data-type="7" style="background: #E91E63;" draggable="true"></div>
-                <div class="palette-item flower" data-type="8" style="background: #00BCD4;" draggable="true"></div>
-                <div class="palette-item flower" data-type="9" style="background: #FF5722;" draggable="true"></div>
-                <div class="palette-item flower" data-type="10" style="background: #8BC34A;" draggable="true"></div>
-            </div>
-
-            <!-- Wrapper Palette -->
-            <div class="palette hidden" id="wrapperPalette">
-                <div class="palette-item wrapper" data-wrapper="1" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
-                <div class="palette-item wrapper" data-wrapper="2" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
-                <div class="palette-item wrapper" data-wrapper="3" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
-            </div>
-
-            <div class="flower-count" id="flowerCount">Flowers: 0/20</div>
-        </footer>
     </div>
 
     <script src="js/state.js"></script>
