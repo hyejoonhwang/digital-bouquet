@@ -3,43 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Bouquet - Share Your Gift</title>
+    <title>Digital Bouquet - Share</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="app">
         <!-- Header -->
         <header class="header">
-            <div class="logo">🌸 Digital Bouquet</div>
-            <button class="btn btn-primary" id="newBouquetBtn">Create Another</button>
+            <button class="btn" id="newBouquetBtn">create new</button>
         </header>
 
         <!-- Main Content -->
         <main class="share-content">
-            <div class="share-container">
-                <div class="success-icon">🎉</div>
-                <h2>Your bouquet is ready to send!</h2>
-                <p class="share-description">Copy this link and share it with your friend:</p>
+            <h2 class="share-title">your bouquet is ready to send</h2>
 
-                <div class="link-container">
-                    <input type="text" class="link-input" id="shareLink" readonly>
-                    <button class="btn btn-primary" id="copyBtn">📋 Copy</button>
-                </div>
-
-                <div class="copy-feedback hidden" id="copyFeedback">✓ Link copied to clipboard!</div>
-
-                <div class="share-note">
-                    <p>📌 This link will expire in 7 days</p>
-                </div>
-
-                <!-- Preview of what was sent -->
-                <div class="sent-preview">
-                    <h3>What you're sending:</h3>
-                    <div class="mini-preview">
-                        <div class="canvas mini-canvas" id="miniCanvas"></div>
-                    </div>
-                </div>
+            <div class="share-preview" id="sharePreview">
+                <div class="canvas preview-canvas" id="miniCanvas"></div>
             </div>
+
+            <button class="copy-btn" id="copyBtn">copy link</button>
+            <div class="copy-feedback hidden" id="copyFeedback">link copied!</div>
+
+            <!-- Hidden input for link -->
+            <input type="hidden" id="shareLink">
         </main>
     </div>
 

@@ -89,7 +89,7 @@ function setupFlowerPalette() {
                 touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
 
                 if (BouquetState.isAtLimit()) {
-                    CanvasManager.showLimitWarning();
+                    alert('Maximum 20 flowers reached!');
                     return;
                 }
 
@@ -99,7 +99,6 @@ function setupFlowerPalette() {
                 const newFlower = BouquetState.addFlower(parseInt(flower.dataset.type), x, y);
                 if (newFlower) {
                     CanvasManager.addFlowerElement(newFlower);
-                    CanvasManager.updateFlowerCount();
                     CanvasManager.hidePlaceholder();
                 }
             }
@@ -219,15 +218,12 @@ function initLetterPage() {
 
     // Setup letter textarea
     const letterText = document.getElementById('letterText');
-    const charCount = document.getElementById('charCount');
 
     // Load existing letter if any
     letterText.value = BouquetState.letter;
-    charCount.textContent = `${letterText.value.length}/1000`;
 
     letterText.addEventListener('input', () => {
         BouquetState.setLetter(letterText.value);
-        charCount.textContent = `${letterText.value.length}/1000`;
         BouquetState.saveToStorage();
     });
 
@@ -237,13 +233,8 @@ function initLetterPage() {
         window.location.href = 'index.html';
     });
 
-    // Send button
-    document.getElementById('sendBtn').addEventListener('click', () => {
-        if (!letterText.value.trim()) {
-            if (!confirm('Your letter is empty. Send anyway?')) {
-                return;
-            }
-        }
+    // Preview button (was Send button)
+    document.getElementById('previewBtn').addEventListener('click', () => {
         BouquetState.saveToStorage();
         window.location.href = 'preview.html';
     });
@@ -263,18 +254,18 @@ function initPreviewPage() {
 
     // Display letter
     const letterPreview = document.getElementById('letterPreview');
-    letterPreview.textContent = BouquetState.letter || '(No message)';
+    letterPreview.textContent = BouquetState.letter || '';
 
     // Edit button
     document.getElementById('editBtn').addEventListener('click', () => {
         window.location.href = 'letter.html';
     });
 
-    // Confirm button
-    document.getElementById('confirmBtn').addEventListener('click', async () => {
-        const btn = document.getElementById('confirmBtn');
+    // Send button (was Confirm button)
+    document.getElementById('sendBtn').addEventListener('click', async () => {
+        const btn = document.getElementById('sendBtn');
         btn.disabled = true;
-        btn.textContent = 'Saving...';
+        btn.textContent = 'saving...';
 
         try {
             const result = await FirebaseService.saveBouquet(BouquetState.getState());
@@ -286,13 +277,13 @@ function initPreviewPage() {
             } else {
                 alert('Failed to save bouquet. Please try again.');
                 btn.disabled = false;
-                btn.textContent = 'Confirm & Get Link';
+                btn.textContent = 'send';
             }
         } catch (error) {
             console.error('Save error:', error);
             alert('Failed to save bouquet. Please try again.');
             btn.disabled = false;
-            btn.textContent = 'Confirm & Get Link';
+            btn.textContent = 'send';
         }
     });
 }
@@ -315,7 +306,7 @@ function initSharePage() {
         CanvasManager.init(miniCanvas, true);
     }
 
-    // Generate and display share link
+    // Generate share link
     const shareLink = document.getElementById('shareLink');
     const shareUrl = FirebaseService.getShareUrl(shareId);
     shareLink.value = shareUrl;
@@ -330,13 +321,17 @@ function initSharePage() {
             }, 3000);
         } catch (err) {
             // Fallback for older browsers
-            shareLink.select();
+            const tempInput = document.createElement('input');
+            tempInput.value = shareUrl;
+            document.body.appendChild(tempInput);
+            tempInput.select();
             document.execCommand('copy');
+            document.body.removeChild(tempInput);
             document.getElementById('copyFeedback').classList.remove('hidden');
         }
     });
 
-    // Create another button
+    // Create new button
     document.getElementById('newBouquetBtn').addEventListener('click', () => {
         BouquetState.clearStorage();
         sessionStorage.removeItem('shareId');
@@ -396,7 +391,7 @@ function setupEnvelope() {
 
             // Display letter
             const revealedLetter = document.getElementById('revealedLetter');
-            revealedLetter.textContent = window.bouquetData.letter || '(No message)';
+            revealedLetter.textContent = window.bouquetData.letter || '';
 
         }, 600);
     });

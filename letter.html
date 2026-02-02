@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Bouquet - Write Your Letter</title>
+    <title>Digital Bouquet - Letter</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="app">
         <!-- Header -->
-        <header class="header">
-            <button class="btn btn-secondary" id="backBtn">← Back</button>
-            <div class="logo">🌸 Digital Bouquet</div>
-            <button class="btn btn-primary" id="sendBtn">Send →</button>
+        <header class="header with-back">
+            <button class="btn" id="backBtn">back</button>
+            <button class="btn" id="previewBtn">preview</button>
         </header>
 
         <!-- Main Content -->
@@ -20,24 +19,20 @@
             <div class="letter-container">
                 <!-- Bouquet Preview -->
                 <div class="preview-section">
-                    <h3>Your Bouquet</h3>
+                    <div class="section-label">your bouquet</div>
                     <div class="canvas preview-canvas" id="previewCanvas"></div>
                 </div>
 
                 <!-- Letter Editor -->
                 <div class="letter-section">
-                    <h3>Your Message</h3>
+                    <div class="section-label">your message<br>-empty postcard</div>
                     <textarea
                         class="letter-textarea"
                         id="letterText"
-                        placeholder="Dear friend,
-
-Write your heartfelt message here...
-
-With love,"
+                        placeholder="your message
+-empty postcard"
                         maxlength="1000"
                     ></textarea>
-                    <div class="char-count" id="charCount">0/1000</div>
                 </div>
             </div>
         </main>

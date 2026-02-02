@@ -9,26 +9,26 @@
 <body>
     <div class="app">
         <!-- Header -->
-        <header class="header">
-            <button class="btn btn-secondary" id="editBtn">← Edit</button>
-            <div class="logo">🌸 Digital Bouquet</div>
-            <button class="btn btn-primary" id="confirmBtn">Confirm & Get Link</button>
+        <header class="header with-center">
+            <button class="btn" id="editBtn">edit</button>
+            <span class="header-center">preview page</span>
+            <button class="btn" id="sendBtn">send</button>
         </header>
 
         <!-- Main Content -->
         <main class="preview-content">
-            <h2 class="preview-title">Preview - This is what your friend will see</h2>
-
             <div class="preview-container">
                 <!-- Bouquet Preview -->
                 <div class="preview-section">
+                    <div class="section-label">your bouquet</div>
                     <div class="canvas preview-canvas" id="previewCanvas"></div>
                 </div>
 
                 <!-- Letter Preview -->
                 <div class="letter-preview-section">
-                    <div class="letter-paper">
-                        <p class="letter-content" id="letterPreview"></p>
+                    <div class="section-label">your message<br>written in font Cedarville Cursive on the postcard</div>
+                    <div class="postcard">
+                        <p class="postcard-content" id="letterPreview"></p>
                     </div>
                 </div>
             </div>

@@ -48,7 +48,7 @@ const CanvasManager = {
 
             // Check if we can add more flowers
             if (BouquetState.isAtLimit()) {
-                this.showLimitWarning();
+                alert('Maximum 20 flowers reached!');
                 return;
             }
 
@@ -56,7 +56,6 @@ const CanvasManager = {
             const flower = BouquetState.addFlower(parseInt(flowerType), x, y);
             if (flower) {
                 this.addFlowerElement(flower);
-                this.updateFlowerCount();
                 this.hidePlaceholder();
             }
         });
@@ -192,7 +191,6 @@ const CanvasManager = {
             elem.remove();
         }
         this.selectedFlower = null;
-        this.updateFlowerCount();
 
         if (BouquetState.flowers.length === 0) {
             this.showPlaceholder();
@@ -226,38 +224,6 @@ const CanvasManager = {
 
         // Update wrapper
         this.updateWrapper(BouquetState.wrapper);
-
-        // Update count
-        this.updateFlowerCount();
-    },
-
-    // Update flower count display
-    updateFlowerCount() {
-        const countElem = document.getElementById('flowerCount');
-        if (countElem) {
-            const count = BouquetState.getFlowerCount();
-            countElem.textContent = `Flowers: ${count}/${BouquetState.MAX_FLOWERS}`;
-
-            countElem.classList.remove('warning', 'limit');
-            if (count >= BouquetState.MAX_FLOWERS) {
-                countElem.classList.add('limit');
-            } else if (count >= BouquetState.MAX_FLOWERS - 5) {
-                countElem.classList.add('warning');
-            }
-        }
-    },
-
-    // Show limit warning
-    showLimitWarning() {
-        const countElem = document.getElementById('flowerCount');
-        if (countElem) {
-            countElem.textContent = `Maximum ${BouquetState.MAX_FLOWERS} flowers reached!`;
-            countElem.classList.add('limit');
-
-            setTimeout(() => {
-                this.updateFlowerCount();
-            }, 2000);
-        }
     },
 
     // Hide placeholder text
