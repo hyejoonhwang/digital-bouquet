@@ -134,9 +134,10 @@ body {
 
 /* Canvas Container */
 .canvas-container {
-    width: 100%;
-    max-width: 300px;
-    aspect-ratio: 3 / 4;
+    width: 1500px;
+    height: 1500px;
+    max-width: 90vw;
+    max-height: 50vh;
 }
 
 .canvas {
@@ -766,9 +767,6 @@ body {
         height: 80px;
     }
 
-    .canvas-container {
-        max-width: 250px;
-    }
 }
 
 /* Mobile */
@@ -857,9 +855,6 @@ body {
         min-height: 200px;
     }
 
-    .canvas-container {
-        max-width: 220px;
-    }
 }
 
 /* Very small screens */
@@ -872,9 +867,5 @@ body {
     .placed-flower {
         width: 35px;
         height: 35px;
-    }
-
-    .canvas-container {
-        max-width: 180px;
     }
 }
