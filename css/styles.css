@@ -111,9 +111,24 @@ body {
 }
 
 /* Landing page specific layout */
-.landing-page .main-content {
+.landing-page {
+    display: flex;
     flex-direction: column;
-    padding-top: 60px;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.landing-page .main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.canvas-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 24px;
 }
 
@@ -170,34 +185,11 @@ body {
     background: #f0f0f0;
 }
 
-/* Tabs for landing page */
-.landing-page .tabs {
-    justify-content: flex-start;
-    width: 100%;
-    max-width: 800px;
-    padding: 0 24px;
-}
-
-.landing-page .tab {
-    background: var(--border-color);
-    color: var(--text-primary);
-    padding: 6px 16px;
-    font-size: 1rem;
-}
-
-.landing-page .tab.active {
-    background: var(--border-color);
-    color: var(--text-primary);
-}
-
 /* Palette Container */
 .palette-container {
-    width: 100%;
-    max-width: 800px;
     border: 1px solid var(--border-color);
     border-radius: 20px;
     padding: 16px;
-    margin: 0 24px;
 }
 
 .palette-slider {
@@ -251,11 +243,34 @@ body {
     display: flex;
 }
 
-/* Bottom Panel (for other pages) */
+/* Bottom Panel */
 .bottom-panel {
     background: var(--surface);
     padding: 16px 24px;
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Landing page bottom panel - at the bottom */
+.landing-page .bottom-panel {
+    background: transparent;
+    box-shadow: none;
+    padding: 16px 24px 24px;
+}
+
+.landing-page .tabs {
+    margin-bottom: 8px;
+}
+
+.landing-page .tab {
+    background: var(--border-color);
+    color: var(--text-primary);
+    padding: 6px 16px;
+    font-size: 1rem;
+}
+
+.landing-page .tab.active {
+    background: var(--border-color);
+    color: var(--text-primary);
 }
 
 .panel-header {
@@ -751,14 +766,6 @@ body {
         height: 80px;
     }
 
-    .palette-container {
-        margin: 0 16px;
-    }
-
-    .landing-page .tabs {
-        padding: 0 16px;
-    }
-
     .canvas-container {
         max-width: 250px;
     }
@@ -783,13 +790,12 @@ body {
         padding: 12px;
     }
 
-    .landing-page .main-content {
-        padding-top: 50px;
-        gap: 16px;
-    }
-
     .bottom-panel {
         padding: 12px 16px;
+    }
+
+    .canvas-area {
+        gap: 16px;
     }
 
     .tabs {
