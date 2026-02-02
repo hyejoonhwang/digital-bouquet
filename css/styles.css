@@ -135,21 +135,22 @@ body {
 
 /* Canvas Container */
 .canvas-container {
-    width: calc(100vh - 300px);
-    height: calc(100vh - 300px);
-    min-width: 300px;
-    min-height: 300px;
+    width: calc(100vh - 300px) !important;
+    height: calc(100vh - 300px) !important;
+    min-width: 500px !important;
+    min-height: 500px !important;
     max-width: 1500px;
     max-height: 1500px;
 }
 
 .canvas {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
     background: var(--wrapper-1);
     position: relative;
     overflow: hidden;
-    /* No border-radius or shadow - canvas IS the wrapper */
+    border-radius: 0 !important;
+    box-shadow: none !important;
 }
 
 .canvas-placeholder {
