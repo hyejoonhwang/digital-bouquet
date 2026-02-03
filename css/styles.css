@@ -497,17 +497,18 @@ body {
 
 .letter-envelope-container .letter-textarea {
     position: absolute;
-    top: 15%;
-    left: 10%;
-    width: 80%;
-    height: 70%;
+    top: 8%;
+    left: 12%;
+    width: 76%;
+    height: 55%;
     background: transparent;
     border: none;
     resize: none;
-    font-family: inherit;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--text-primary);
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #333;
+    padding: 10px;
 }
 
 .letter-envelope-container .letter-textarea:focus {
