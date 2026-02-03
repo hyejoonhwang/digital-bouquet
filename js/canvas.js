@@ -336,7 +336,7 @@ const CanvasManager = {
         const flowersLayer = document.createElement('div');
         flowersLayer.className = 'bouquet-layer bouquet-flowers';
 
-        // Arrange flowers in a centered cluster pattern
+        // Arrange flowers in a centered cluster pattern (ignoring canvas positions)
         const flowerCount = BouquetState.flowers.length;
         BouquetState.flowers.forEach((flower, index) => {
             const elem = document.createElement('div');
@@ -349,18 +349,19 @@ const CanvasManager = {
             img.draggable = false;
             elem.appendChild(img);
 
-            // Calculate position in a cluster (spread around center)
-            const angle = (index / flowerCount) * Math.PI * 2 + Math.random() * 0.5;
-            const radius = 20 + (index % 3) * 25 + Math.random() * 15;
+            // Calculate position in a centered cluster (spread around center)
+            const angle = (index / flowerCount) * Math.PI * 2 + Math.random() * 0.3;
+            const radius = 15 + (index % 3) * 20 + Math.random() * 10;
             const offsetX = Math.cos(angle) * radius;
-            const offsetY = Math.sin(angle) * radius * 0.6; // Flatten vertically
+            const offsetY = Math.sin(angle) * radius * 0.4; // Flatten vertically
 
+            // Center flowers in middle of bouquet area (50% horizontal, 40% vertical)
             elem.style.left = `calc(50% + ${offsetX}px)`;
-            elem.style.top = `calc(35% + ${offsetY}px)`;
+            elem.style.top = `calc(40% + ${offsetY}px)`;
 
             const rotation = flower.rotation || 0;
             const scale = flower.scale || 1;
-            elem.style.transform = `translate(-50%, -50%) rotate(${rotation}deg) scale(${scale})`;
+            elem.style.transform = `translate(-50%, -50%) rotate(${rotation}deg) scale(${scale * 0.8})`;
 
             flowersLayer.appendChild(elem);
         });

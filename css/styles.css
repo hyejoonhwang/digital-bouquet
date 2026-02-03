@@ -544,9 +544,9 @@ body {
 .preview-canvas {
     width: 100%;
     aspect-ratio: 3 / 4;
-    max-height: 400px;
+    max-height: 500px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     background: transparent;
 }
 
