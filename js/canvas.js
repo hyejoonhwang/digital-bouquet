@@ -83,6 +83,7 @@ const CanvasManager = {
         elem.dataset.id = flower.id;
         elem.style.left = `${flower.x - 40}px`;
         elem.style.top = `${flower.y - 40}px`;
+        elem.style.zIndex = '1';
 
         // Add flower image
         const img = document.createElement('img');
@@ -165,22 +166,22 @@ const CanvasManager = {
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
         const canvasRect = this.canvas.getBoundingClientRect();
-        let x = clientX - canvasRect.left - this.dragOffsetX + 25;
-        let y = clientY - canvasRect.top - this.dragOffsetY + 25;
+        let x = clientX - canvasRect.left - this.dragOffsetX + 40;
+        let y = clientY - canvasRect.top - this.dragOffsetY + 40;
 
         // Constrain to canvas bounds
-        x = Math.max(25, Math.min(canvasRect.width - 25, x));
-        y = Math.max(25, Math.min(canvasRect.height - 25, y));
+        x = Math.max(40, Math.min(canvasRect.width - 40, x));
+        y = Math.max(40, Math.min(canvasRect.height - 40, y));
 
-        elem.style.left = `${x - 25}px`;
-        elem.style.top = `${y - 25}px`;
+        elem.style.left = `${x - 40}px`;
+        elem.style.top = `${y - 40}px`;
     },
 
     // End drag
     endDrag(flowerId, elem, moveHandler, endHandler) {
         if (this.isDragging) {
-            const x = parseFloat(elem.style.left) + 25;
-            const y = parseFloat(elem.style.top) + 25;
+            const x = parseFloat(elem.style.left) + 40;
+            const y = parseFloat(elem.style.top) + 40;
             BouquetState.moveFlower(flowerId, x, y);
         }
 
@@ -269,11 +270,15 @@ const CanvasManager = {
         document.removeEventListener('touchend', endHandler);
     },
 
-    // Select a flower
+    // Select a flower (also brings to top layer)
     selectFlower(flowerId, elem) {
         this.deselectFlower();
         this.selectedFlower = flowerId;
         elem.classList.add('selected');
+
+        // Bring to top layer
+        this.maxZIndex = (this.maxZIndex || 1) + 1;
+        elem.style.zIndex = this.maxZIndex;
     },
 
     // Deselect current flower
