@@ -215,13 +215,6 @@ body {
     overflow: hidden;
 }
 
-.palette-slider {
-    width: 50%;
-    height: 4px;
-    background: var(--border-color);
-    border-radius: 2px;
-    margin-top: 12px;
-}
 
 /* Placed Flowers on Canvas */
 .placed-flower {
@@ -962,11 +955,27 @@ body {
     .letter-container,
     .preview-container,
     .revealed-container {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .preview-section,
+    .letter-section {
+        width: 100% !important;
+        max-width: 400px;
     }
 
     .preview-canvas {
-        max-height: 300px;
+        max-height: 350px;
+    }
+
+    .canvas-container {
+        width: calc(100vw - 40px) !important;
+        height: calc(100vw - 40px) !important;
+        min-width: 300px !important;
+        min-height: 300px !important;
+        max-width: 500px !important;
+        max-height: 500px !important;
     }
 
     .panel-header {
@@ -1010,7 +1019,16 @@ body {
     }
 
     .canvas-area {
-        gap: 16px;
+        gap: 12px;
+    }
+
+    .canvas-container {
+        width: calc(100vw - 30px) !important;
+        height: calc(100vw - 30px) !important;
+        min-width: 280px !important;
+        min-height: 280px !important;
+        max-width: 400px !important;
+        max-height: 400px !important;
     }
 
     .tabs {
@@ -1021,6 +1039,18 @@ body {
     .action-buttons {
         width: 100%;
         justify-content: center;
+    }
+
+    .letter-container {
+        flex-direction: column;
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .preview-section,
+    .letter-section {
+        width: 100% !important;
+        max-width: 100%;
     }
 
     .action-buttons .btn {
