@@ -17,18 +17,23 @@ const BouquetState = {
     // Constants
     MAX_FLOWERS: 20,
 
-    // Flower colors mapping
-    flowerColors: {
-        1: '#FF6B6B',
-        2: '#FF8E53',
-        3: '#FFCD38',
-        4: '#6BCB77',
-        5: '#4D96FF',
-        6: '#9B59B6',
-        7: '#E91E63',
-        8: '#00BCD4',
-        9: '#FF5722',
-        10: '#8BC34A'
+    // Flower image paths
+    flowerImages: {
+        1: 'assets/flowers/flower01.png',
+        2: 'assets/flowers/flower02.png',
+        3: 'assets/flowers/flower03.png',
+        4: 'assets/flowers/flower04.png',
+        5: 'assets/flowers/flower05.png',
+        6: 'assets/flowers/flower06.png',
+        7: 'assets/flowers/flower07.png',
+        8: 'assets/flowers/flower08.png',
+        9: 'assets/flowers/flower09.png',
+        10: 'assets/flowers/flower10.png',
+        11: 'assets/flowers/flower11.png',
+        12: 'assets/flowers/flower12.png',
+        13: 'assets/flowers/flower13.png',
+        14: 'assets/flowers/filler01.png',
+        15: 'assets/flowers/green01.png'
     },
 
     // Wrapper image paths
@@ -205,7 +210,7 @@ const BouquetState = {
         // Assign new random types and shuffled positions to each flower
         this.flowers = this.flowers.map((flower, index) => ({
             id: flower.id,
-            type: Math.floor(Math.random() * 10) + 1, // Random new flower type
+            type: Math.floor(Math.random() * 15) + 1, // Random new flower type
             x: positions[index].x,
             y: positions[index].y,
             rotation: flower.rotation || 0,

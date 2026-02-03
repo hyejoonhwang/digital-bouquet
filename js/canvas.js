@@ -81,9 +81,15 @@ const CanvasManager = {
         const elem = document.createElement('div');
         elem.className = 'placed-flower';
         elem.dataset.id = flower.id;
-        elem.style.background = BouquetState.flowerColors[flower.type];
-        elem.style.left = `${flower.x - 25}px`;
-        elem.style.top = `${flower.y - 25}px`;
+        elem.style.left = `${flower.x - 40}px`;
+        elem.style.top = `${flower.y - 40}px`;
+
+        // Add flower image
+        const img = document.createElement('img');
+        img.src = BouquetState.flowerImages[flower.type];
+        img.className = 'flower-img';
+        img.draggable = false;
+        elem.appendChild(img);
 
         // Apply rotation and scale
         const rotation = flower.rotation || 0;
@@ -336,7 +342,13 @@ const CanvasManager = {
         BouquetState.flowers.forEach((flower, index) => {
             const elem = document.createElement('div');
             elem.className = 'placed-flower bouquet-flower';
-            elem.style.background = BouquetState.flowerColors[flower.type];
+
+            // Add flower image
+            const img = document.createElement('img');
+            img.src = BouquetState.flowerImages[flower.type];
+            img.className = 'flower-img';
+            img.draggable = false;
+            elem.appendChild(img);
 
             // Calculate position in a cluster (spread around center)
             const angle = (index / flowerCount) * Math.PI * 2 + Math.random() * 0.5;
