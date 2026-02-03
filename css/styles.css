@@ -46,8 +46,9 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 16px 24px;
-    background: var(--surface);
-    box-shadow: var(--shadow);
+    background: transparent;
+    box-shadow: none;
+    border: none;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -66,9 +67,7 @@ body {
 }
 
 .logo {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--primary-color);
+    display: none;
 }
 
 /* Buttons */
@@ -505,7 +504,7 @@ body {
     background: transparent !important;
     border: none !important;
     resize: none !important;
-    font-family: 'Georgia', serif;
+    font-family: 'Cedarville Cursive', cursive;
     font-size: 0.95rem;
     line-height: 1.5;
     color: #333;
