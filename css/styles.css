@@ -497,10 +497,10 @@ body {
 
 .letter-envelope-container .letter-textarea {
     position: absolute;
-    top: 8%;
-    left: 12%;
-    width: 76%;
-    height: 55%;
+    top: 18%;
+    left: 15%;
+    width: 70%;
+    height: 38%;
     background: transparent;
     border: none;
     resize: none;
@@ -508,7 +508,7 @@ body {
     font-size: 0.95rem;
     line-height: 1.5;
     color: #333;
-    padding: 10px;
+    padding: 8px;
 }
 
 .letter-envelope-container .letter-textarea:focus {
