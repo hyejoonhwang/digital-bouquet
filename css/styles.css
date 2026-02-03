@@ -496,14 +496,15 @@ body {
 }
 
 .letter-envelope-container .letter-textarea {
-    position: absolute;
-    top: 68%;
-    left: 15%;
-    width: 70%;
-    height: 18%;
-    background: transparent;
-    border: none;
-    resize: none;
+    position: absolute !important;
+    top: 68% !important;
+    left: 15% !important;
+    width: 70% !important;
+    height: 18% !important;
+    min-height: unset !important;
+    background: transparent !important;
+    border: none !important;
+    resize: none !important;
     font-family: 'Georgia', serif;
     font-size: 0.95rem;
     line-height: 1.5;
