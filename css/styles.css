@@ -535,6 +535,22 @@ body {
     opacity: 0.6;
 }
 
+/* Letter preview text (for preview page) */
+.letter-preview-text {
+    position: absolute !important;
+    top: 20% !important;
+    left: 15% !important;
+    width: 60% !important;
+    height: 24% !important;
+    font-family: 'Cedarville Cursive', cursive;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #333;
+    padding: 8px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+}
+
 .letter-textarea {
     width: 100%;
     min-height: 300px;
