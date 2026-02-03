@@ -6,9 +6,13 @@ const CanvasManager = {
     canvas: null,
     selectedFlower: null,
     isDragging: false,
+    isTransforming: false,
     dragOffsetX: 0,
     dragOffsetY: 0,
     isReadOnly: false,
+    transformStartAngle: 0,
+    transformStartScale: 0,
+    transformStartDistance: 0,
 
     // Initialize canvas
     init(canvasElement, readOnly = false) {
@@ -81,8 +85,15 @@ const CanvasManager = {
         elem.style.left = `${flower.x - 25}px`;
         elem.style.top = `${flower.y - 25}px`;
 
+        // Apply rotation and scale
+        const rotation = flower.rotation || 0;
+        const scale = flower.scale || 1;
+        elem.style.transform = `rotate(${rotation}deg) scale(${scale})`;
+        elem.dataset.rotation = rotation;
+        elem.dataset.scale = scale;
+
         if (!this.isReadOnly) {
-            // Delete button
+            // Delete button (top-right)
             const deleteBtn = document.createElement('button');
             deleteBtn.className = 'delete-btn';
             deleteBtn.innerHTML = '×';
@@ -91,6 +102,14 @@ const CanvasManager = {
                 this.deleteFlower(flower.id);
             });
             elem.appendChild(deleteBtn);
+
+            // Transform handle (bottom-left) - for rotation and resize
+            const transformBtn = document.createElement('button');
+            transformBtn.className = 'transform-btn';
+            transformBtn.innerHTML = '⟳';
+            transformBtn.addEventListener('mousedown', (e) => this.startTransform(e, flower.id, elem));
+            transformBtn.addEventListener('touchstart', (e) => this.startTransform(e, flower.id, elem), { passive: false });
+            elem.appendChild(transformBtn);
 
             // Click to select
             elem.addEventListener('click', (e) => {
@@ -109,6 +128,7 @@ const CanvasManager = {
     // Start dragging a flower
     startDrag(e, flowerId, elem) {
         if (e.target.classList.contains('delete-btn')) return;
+        if (e.target.classList.contains('transform-btn')) return;
 
         e.preventDefault();
         this.isDragging = true;
@@ -159,6 +179,83 @@ const CanvasManager = {
         }
 
         this.isDragging = false;
+
+        document.removeEventListener('mousemove', moveHandler);
+        document.removeEventListener('mouseup', endHandler);
+        document.removeEventListener('touchmove', moveHandler);
+        document.removeEventListener('touchend', endHandler);
+    },
+
+    // Start transform (rotation and scale)
+    startTransform(e, flowerId, elem) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        this.isTransforming = true;
+        this.selectFlower(flowerId, elem);
+
+        // Get flower center position
+        const rect = elem.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        // Calculate initial angle and distance from center
+        this.transformStartAngle = Math.atan2(clientY - centerY, clientX - centerX) * (180 / Math.PI);
+        this.transformStartDistance = Math.hypot(clientX - centerX, clientY - centerY);
+
+        // Get current rotation and scale
+        const currentRotation = parseFloat(elem.dataset.rotation) || 0;
+        const currentScale = parseFloat(elem.dataset.scale) || 1;
+        elem.dataset.initialRotation = currentRotation;
+        elem.dataset.initialScale = currentScale;
+
+        const moveHandler = (e) => this.onTransform(e, flowerId, elem, centerX, centerY);
+        const endHandler = () => this.endTransform(flowerId, elem, moveHandler, endHandler);
+
+        document.addEventListener('mousemove', moveHandler);
+        document.addEventListener('mouseup', endHandler);
+        document.addEventListener('touchmove', moveHandler, { passive: false });
+        document.addEventListener('touchend', endHandler);
+    },
+
+    // Handle transform movement
+    onTransform(e, flowerId, elem, centerX, centerY) {
+        if (!this.isTransforming) return;
+        e.preventDefault();
+
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        // Calculate new angle
+        const currentAngle = Math.atan2(clientY - centerY, clientX - centerX) * (180 / Math.PI);
+        const angleDiff = currentAngle - this.transformStartAngle;
+        const initialRotation = parseFloat(elem.dataset.initialRotation) || 0;
+        const newRotation = initialRotation + angleDiff;
+
+        // Calculate new scale based on distance from center
+        const currentDistance = Math.hypot(clientX - centerX, clientY - centerY);
+        const scaleFactor = currentDistance / this.transformStartDistance;
+        const initialScale = parseFloat(elem.dataset.initialScale) || 1;
+        const newScale = Math.max(0.5, Math.min(2.5, initialScale * scaleFactor));
+
+        // Apply transform
+        elem.style.transform = `rotate(${newRotation}deg) scale(${newScale})`;
+        elem.dataset.rotation = newRotation;
+        elem.dataset.scale = newScale;
+    },
+
+    // End transform
+    endTransform(flowerId, elem, moveHandler, endHandler) {
+        if (this.isTransforming) {
+            const rotation = parseFloat(elem.dataset.rotation) || 0;
+            const scale = parseFloat(elem.dataset.scale) || 1;
+            BouquetState.transformFlower(flowerId, rotation, scale);
+        }
+
+        this.isTransforming = false;
 
         document.removeEventListener('mousemove', moveHandler);
         document.removeEventListener('mouseup', endHandler);

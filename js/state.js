@@ -5,7 +5,7 @@
 
 const BouquetState = {
     // Current state
-    flowers: [], // Array of { id, type, x, y }
+    flowers: [], // Array of { id, type, x, y, rotation, scale }
     wrapper: 1,
     letter: '',
 
@@ -110,7 +110,9 @@ const BouquetState = {
             id: this.generateId(),
             type: type,
             x: x,
-            y: y
+            y: y,
+            rotation: 0,
+            scale: 1
         };
 
         this.flowers.push(flower);
@@ -124,6 +126,18 @@ const BouquetState = {
             this.saveState();
             flower.x = x;
             flower.y = y;
+            return true;
+        }
+        return false;
+    },
+
+    // Transform a flower (rotation and scale)
+    transformFlower(id, rotation, scale) {
+        const flower = this.flowers.find(f => f.id === id);
+        if (flower) {
+            this.saveState();
+            flower.rotation = rotation;
+            flower.scale = Math.max(0.5, Math.min(2.5, scale)); // Clamp scale between 0.5 and 2.5
             return true;
         }
         return false;
@@ -188,7 +202,9 @@ const BouquetState = {
             id: flower.id,
             type: Math.floor(Math.random() * 10) + 1, // Random new flower type
             x: positions[index].x,
-            y: positions[index].y
+            y: positions[index].y,
+            rotation: flower.rotation || 0,
+            scale: flower.scale || 1
         }));
 
         return this.flowers;
