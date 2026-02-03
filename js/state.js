@@ -165,26 +165,31 @@ const BouquetState = {
         return false;
     },
 
-    // Shuffle - randomly place 5-10 flowers
+    // Shuffle - change flower types and swap positions among existing flowers
     shuffle(canvasWidth, canvasHeight) {
-        this.saveState();
-        this.flowers = [];
-
-        const count = Math.floor(Math.random() * 6) + 5; // 5-10 flowers
-        const padding = 50;
-
-        for (let i = 0; i < count; i++) {
-            const type = Math.floor(Math.random() * 10) + 1;
-            const x = padding + Math.random() * (canvasWidth - padding * 2);
-            const y = padding + Math.random() * (canvasHeight - padding * 2);
-
-            this.flowers.push({
-                id: this.generateId(),
-                type: type,
-                x: x,
-                y: y
-            });
+        // Do nothing if no flowers
+        if (this.flowers.length === 0) {
+            return this.flowers;
         }
+
+        this.saveState();
+
+        // Extract current positions
+        const positions = this.flowers.map(f => ({ x: f.x, y: f.y }));
+
+        // Shuffle positions array (Fisher-Yates)
+        for (let i = positions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [positions[i], positions[j]] = [positions[j], positions[i]];
+        }
+
+        // Assign new random types and shuffled positions to each flower
+        this.flowers = this.flowers.map((flower, index) => ({
+            id: flower.id,
+            type: Math.floor(Math.random() * 10) + 1, // Random new flower type
+            x: positions[index].x,
+            y: positions[index].y
+        }));
 
         return this.flowers;
     },
