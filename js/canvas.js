@@ -81,8 +81,8 @@ const CanvasManager = {
         const elem = document.createElement('div');
         elem.className = 'placed-flower';
         elem.dataset.id = flower.id;
-        elem.style.left = `${flower.x - 60}px`;
-        elem.style.top = `${flower.y - 60}px`;
+        elem.style.left = `${flower.x - 75}px`;
+        elem.style.top = `${flower.y - 75}px`;
         elem.style.zIndex = '1';
 
         // Add flower image
@@ -164,18 +164,18 @@ const CanvasManager = {
         let y = clientY - canvasRect.top;
 
         // Constrain to canvas bounds
-        x = Math.max(60, Math.min(canvasRect.width - 60, x));
-        y = Math.max(60, Math.min(canvasRect.height - 60, y));
+        x = Math.max(75, Math.min(canvasRect.width - 75, x));
+        y = Math.max(75, Math.min(canvasRect.height - 75, y));
 
-        elem.style.left = `${x - 60}px`;
-        elem.style.top = `${y - 60}px`;
+        elem.style.left = `${x - 75}px`;
+        elem.style.top = `${y - 75}px`;
     },
 
     // End drag
     endDrag(flowerId, elem, moveHandler, endHandler) {
         if (this.isDragging) {
-            const x = parseFloat(elem.style.left) + 60;
-            const y = parseFloat(elem.style.top) + 60;
+            const x = parseFloat(elem.style.left) + 75;
+            const y = parseFloat(elem.style.top) + 75;
             BouquetState.moveFlower(flowerId, x, y);
         }
 
