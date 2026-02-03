@@ -141,13 +141,6 @@ const CanvasManager = {
         this.isDragging = true;
         this.selectFlower(flowerId, elem);
 
-        const rect = elem.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-        this.dragOffsetX = clientX - rect.left;
-        this.dragOffsetY = clientY - rect.top;
-
         const moveHandler = (e) => this.onDrag(e, flowerId, elem);
         const endHandler = () => this.endDrag(flowerId, elem, moveHandler, endHandler);
 
@@ -157,7 +150,7 @@ const CanvasManager = {
         document.addEventListener('touchend', endHandler);
     },
 
-    // Handle drag movement
+    // Handle drag movement - flower center follows cursor
     onDrag(e, flowerId, elem) {
         if (!this.isDragging) return;
         e.preventDefault();
@@ -166,8 +159,9 @@ const CanvasManager = {
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
         const canvasRect = this.canvas.getBoundingClientRect();
-        let x = clientX - canvasRect.left - this.dragOffsetX + 40;
-        let y = clientY - canvasRect.top - this.dragOffsetY + 40;
+        // Position flower center at cursor
+        let x = clientX - canvasRect.left;
+        let y = clientY - canvasRect.top;
 
         // Constrain to canvas bounds
         x = Math.max(40, Math.min(canvasRect.width - 40, x));
