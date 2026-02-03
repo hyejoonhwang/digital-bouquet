@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Bouquet - Write Your Letter</title>
-    <link rel="stylesheet" href="css/styles.css?v=5">
+    <link rel="stylesheet" href="css/styles.css?v=6">
 </head>
 <body>
     <div class="app">
@@ -19,32 +19,30 @@
         <main class="letter-content">
             <div class="letter-container">
                 <!-- Bouquet Preview -->
-                <div class="preview-section">
-                    <h3>Your Bouquet</h3>
+                <div class="preview-section no-border">
                     <div class="canvas preview-canvas" id="previewCanvas"></div>
                 </div>
 
                 <!-- Letter Editor -->
-                <div class="letter-section">
-                    <h3>Your Message</h3>
-                    <textarea
-                        class="letter-textarea"
-                        id="letterText"
-                        placeholder="Dear friend,
-
-Write your heartfelt message here...
-
-With love,"
-                        maxlength="1000"
-                    ></textarea>
+                <div class="letter-section no-border">
+                    <h3>Send love to your valentine</h3>
+                    <div class="letter-envelope-container">
+                        <img src="assets/letter.png" alt="Letter" class="letter-bg">
+                        <textarea
+                            class="letter-textarea"
+                            id="letterText"
+                            placeholder="Write your heartfelt message here..."
+                            maxlength="1000"
+                        ></textarea>
+                    </div>
                     <div class="char-count" id="charCount">0/1000</div>
                 </div>
             </div>
         </main>
     </div>
 
-    <script src="js/state.js?v=5"></script>
-    <script src="js/canvas.js?v=5"></script>
-    <script src="js/app.js?v=5"></script>
+    <script src="js/state.js?v=6"></script>
+    <script src="js/canvas.js?v=6"></script>
+    <script src="js/app.js?v=6"></script>
 </body>
 </html>

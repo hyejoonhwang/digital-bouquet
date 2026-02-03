@@ -458,11 +458,20 @@ body {
     box-shadow: var(--shadow);
 }
 
+.preview-section.no-border,
+.letter-section.no-border {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
 .preview-section h3,
 .letter-section h3 {
     margin-bottom: 16px;
     color: var(--text-primary);
     font-size: 1.1rem;
+    text-align: center;
 }
 
 .preview-canvas {
@@ -472,6 +481,44 @@ body {
     position: relative;
     overflow: hidden;
     background: transparent;
+}
+
+/* Letter envelope with image background */
+.letter-envelope-container {
+    position: relative;
+    width: 100%;
+}
+
+.letter-bg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.letter-envelope-container .letter-textarea {
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    width: 80%;
+    height: 70%;
+    background: transparent;
+    border: none;
+    resize: none;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.letter-envelope-container .letter-textarea:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.letter-envelope-container .letter-textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
 }
 
 .letter-textarea {
