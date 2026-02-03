@@ -468,6 +468,7 @@ body {
     height: 100%;
     z-index: 2;
     pointer-events: none;
+    overflow: visible;
 }
 
 .bouquet-flowers .placed-flower {
@@ -546,7 +547,12 @@ body {
     aspect-ratio: 3 / 4;
     max-height: 500px;
     position: relative;
-    overflow: visible;
+    overflow: visible !important;
+}
+
+.preview-section {
+    overflow: visible !important;
+}
     background: transparent;
 }
 

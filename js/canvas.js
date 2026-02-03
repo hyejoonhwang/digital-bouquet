@@ -361,7 +361,7 @@ const CanvasManager = {
 
             const rotation = flower.rotation || 0;
             const scale = flower.scale || 1;
-            elem.style.transform = `translate(-50%, -50%) rotate(${rotation}deg) scale(${scale * 0.8})`;
+            elem.style.transform = `translate(-50%, -50%) rotate(${rotation}deg) scale(${scale})`;
 
             flowersLayer.appendChild(elem);
         });
