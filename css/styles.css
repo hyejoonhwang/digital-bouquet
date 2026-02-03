@@ -226,16 +226,13 @@ body {
 /* Placed Flowers on Canvas */
 .placed-flower {
     position: absolute;
-    width: 200px;
-    height: 200px;
     cursor: move;
     transition: box-shadow 0.2s ease;
 }
 
 .flower-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    height: 200px;
+    width: auto;
     pointer-events: none;
 }
 
@@ -478,9 +475,9 @@ body {
     position: absolute;
 }
 
-.bouquet-flower {
-    width: 150px;
-    height: 150px;
+.bouquet-flower .flower-img {
+    height: 180px !important;
+    width: auto !important;
 }
 
 .bouquet-front {

@@ -81,8 +81,8 @@ const CanvasManager = {
         const elem = document.createElement('div');
         elem.className = 'placed-flower';
         elem.dataset.id = flower.id;
-        elem.style.left = `${flower.x - 100}px`;
-        elem.style.top = `${flower.y - 100}px`;
+        elem.style.left = `${flower.x}px`;
+        elem.style.top = `${flower.y}px`;
         elem.style.zIndex = '1';
 
         // Add flower image
@@ -92,10 +92,10 @@ const CanvasManager = {
         img.draggable = false;
         elem.appendChild(img);
 
-        // Apply rotation and scale
+        // Apply rotation and scale (translate centers the flower on position)
         const rotation = flower.rotation || 0;
         const scale = flower.scale || 1;
-        elem.style.transform = `rotate(${rotation}deg) scale(${scale})`;
+        elem.style.transform = `translate(-50%, -50%) rotate(${rotation}deg) scale(${scale})`;
         elem.dataset.rotation = rotation;
         elem.dataset.scale = scale;
 
@@ -163,19 +163,19 @@ const CanvasManager = {
         let x = clientX - canvasRect.left;
         let y = clientY - canvasRect.top;
 
-        // Constrain to canvas bounds
-        x = Math.max(100, Math.min(canvasRect.width - 100, x));
+        // Constrain to canvas bounds (with margin)
+        x = Math.max(50, Math.min(canvasRect.width - 50, x));
         y = Math.max(100, Math.min(canvasRect.height - 100, y));
 
-        elem.style.left = `${x - 100}px`;
-        elem.style.top = `${y - 100}px`;
+        elem.style.left = `${x}px`;
+        elem.style.top = `${y}px`;
     },
 
     // End drag
     endDrag(flowerId, elem, moveHandler, endHandler) {
         if (this.isDragging) {
-            const x = parseFloat(elem.style.left) + 100;
-            const y = parseFloat(elem.style.top) + 100;
+            const x = parseFloat(elem.style.left);
+            const y = parseFloat(elem.style.top);
             BouquetState.moveFlower(flowerId, x, y);
         }
 
@@ -242,8 +242,8 @@ const CanvasManager = {
         const initialScale = parseFloat(elem.dataset.initialScale) || 1;
         const newScale = Math.max(0.3, Math.min(4, initialScale * scaleFactor));
 
-        // Apply transform
-        elem.style.transform = `rotate(${newRotation}deg) scale(${newScale})`;
+        // Apply transform (keep translate for centering)
+        elem.style.transform = `translate(-50%, -50%) rotate(${newRotation}deg) scale(${newScale})`;
         elem.dataset.rotation = newRotation;
         elem.dataset.scale = newScale;
     },
