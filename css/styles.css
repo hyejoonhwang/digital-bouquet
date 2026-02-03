@@ -223,8 +223,8 @@ body {
 /* Placed Flowers on Canvas */
 .placed-flower {
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     cursor: move;
     transition: box-shadow 0.2s ease;
 }
@@ -374,7 +374,28 @@ body {
 .palette {
     display: flex;
     gap: 8px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+}
+
+.palette::-webkit-scrollbar {
+    height: 6px;
+}
+
+.palette::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.palette::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.palette::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
 }
 
 .palette.hidden {
@@ -383,10 +404,12 @@ body {
 
 .palette-item {
     width: 80px;
+    min-width: 80px;
     height: 100px;
     cursor: pointer;
     transition: transform 0.2s ease;
     border: 1px solid var(--border-color);
+    flex-shrink: 0;
 }
 
 .palette-item:hover {

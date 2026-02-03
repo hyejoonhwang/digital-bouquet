@@ -81,8 +81,8 @@ const CanvasManager = {
         const elem = document.createElement('div');
         elem.className = 'placed-flower';
         elem.dataset.id = flower.id;
-        elem.style.left = `${flower.x - 40}px`;
-        elem.style.top = `${flower.y - 40}px`;
+        elem.style.left = `${flower.x - 60}px`;
+        elem.style.top = `${flower.y - 60}px`;
         elem.style.zIndex = '1';
 
         // Add flower image
@@ -164,18 +164,18 @@ const CanvasManager = {
         let y = clientY - canvasRect.top;
 
         // Constrain to canvas bounds
-        x = Math.max(40, Math.min(canvasRect.width - 40, x));
-        y = Math.max(40, Math.min(canvasRect.height - 40, y));
+        x = Math.max(60, Math.min(canvasRect.width - 60, x));
+        y = Math.max(60, Math.min(canvasRect.height - 60, y));
 
-        elem.style.left = `${x - 40}px`;
-        elem.style.top = `${y - 40}px`;
+        elem.style.left = `${x - 60}px`;
+        elem.style.top = `${y - 60}px`;
     },
 
     // End drag
     endDrag(flowerId, elem, moveHandler, endHandler) {
         if (this.isDragging) {
-            const x = parseFloat(elem.style.left) + 40;
-            const y = parseFloat(elem.style.top) + 40;
+            const x = parseFloat(elem.style.left) + 60;
+            const y = parseFloat(elem.style.top) + 60;
             BouquetState.moveFlower(flowerId, x, y);
         }
 
@@ -240,7 +240,7 @@ const CanvasManager = {
         const currentDistance = Math.hypot(clientX - centerX, clientY - centerY);
         const scaleFactor = currentDistance / this.transformStartDistance;
         const initialScale = parseFloat(elem.dataset.initialScale) || 1;
-        const newScale = Math.max(0.5, Math.min(2.5, initialScale * scaleFactor));
+        const newScale = Math.max(0.3, Math.min(4, initialScale * scaleFactor));
 
         // Apply transform
         elem.style.transform = `rotate(${newRotation}deg) scale(${newScale})`;
