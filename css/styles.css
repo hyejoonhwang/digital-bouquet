@@ -468,6 +468,16 @@ body {
     box-shadow: none;
 }
 
+.preview-section {
+    width: 350px;
+    flex-shrink: 0;
+}
+
+.letter-section {
+    width: 400px;
+    flex-shrink: 0;
+}
+
 .preview-section h3,
 .letter-section h3 {
     margin-bottom: 16px;
