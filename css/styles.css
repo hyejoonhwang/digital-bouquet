@@ -497,10 +497,10 @@ body {
 
 .letter-envelope-container .letter-textarea {
     position: absolute;
-    top: 18%;
+    top: 28%;
     left: 15%;
     width: 70%;
-    height: 38%;
+    height: 32%;
     background: transparent;
     border: none;
     resize: none;
