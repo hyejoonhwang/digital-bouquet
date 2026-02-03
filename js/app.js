@@ -381,30 +381,23 @@ async function initViewPage() {
 }
 
 function setupEnvelope() {
-    const envelope = document.getElementById('envelope');
     const envelopeContainer = document.getElementById('envelopeContainer');
 
     envelopeContainer.addEventListener('click', () => {
-        // Add opened class for animation
-        envelope.classList.add('opened');
+        // Hide envelope view and show revealed content
+        document.getElementById('envelopeView').classList.add('hidden');
+        document.getElementById('revealedView').classList.remove('hidden');
 
-        // After animation, show revealed content
-        setTimeout(() => {
-            document.getElementById('envelopeView').classList.add('hidden');
-            document.getElementById('revealedView').classList.remove('hidden');
+        // Load bouquet data into state
+        BouquetState.loadState(window.bouquetData);
 
-            // Load bouquet data into state
-            BouquetState.loadState(window.bouquetData);
+        // Initialize revealed canvas
+        const revealedCanvas = document.getElementById('revealedCanvas');
+        CanvasManager.init(revealedCanvas, true);
 
-            // Initialize revealed canvas
-            const revealedCanvas = document.getElementById('revealedCanvas');
-            CanvasManager.init(revealedCanvas, true);
-
-            // Display letter
-            const revealedLetter = document.getElementById('revealedLetter');
-            revealedLetter.textContent = window.bouquetData.letter || '(No message)';
-
-        }, 600);
+        // Display letter
+        const revealedLetter = document.getElementById('revealedLetter');
+        revealedLetter.textContent = window.bouquetData.letter || '(No message)';
     });
 
     // Create own button
