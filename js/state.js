@@ -19,21 +19,21 @@ const BouquetState = {
 
     // Flower image paths
     flowerImages: {
-        1: 'assets/flowers/flower01.png',
-        2: 'assets/flowers/flower02.png',
-        3: 'assets/flowers/flower03.png',
-        4: 'assets/flowers/flower04.png',
-        5: 'assets/flowers/flower05.png',
-        6: 'assets/flowers/flower06.png',
-        7: 'assets/flowers/flower07.png',
-        8: 'assets/flowers/flower08.png',
-        9: 'assets/flowers/flower09.png',
-        10: 'assets/flowers/flower10.png',
-        11: 'assets/flowers/flower11.png',
-        12: 'assets/flowers/flower12.png',
-        13: 'assets/flowers/flower13.png',
-        14: 'assets/flowers/filler01.png',
-        15: 'assets/flowers/green01.png'
+        1: 'assets/flowers/flower-01.png',
+        2: 'assets/flowers/flower-02.png',
+        3: 'assets/flowers/flower-03.png',
+        4: 'assets/flowers/flower-04.png',
+        5: 'assets/flowers/flower-05.png',
+        6: 'assets/flowers/flower-06.png',
+        7: 'assets/flowers/flower-07.png',
+        8: 'assets/flowers/flower-08.png',
+        9: 'assets/flowers/flower-09.png',
+        10: 'assets/flowers/flower-10.png',
+        11: 'assets/flowers/flower-11.png',
+        12: 'assets/flowers/flower-12.png',
+        13: 'assets/flowers/flower-13.png',
+        14: 'assets/flowers/filler-01.png',
+        15: 'assets/flowers/green-01.png'
     },
 
     // Wrapper image paths
