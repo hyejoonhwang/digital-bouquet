@@ -31,11 +31,16 @@ const BouquetState = {
         10: '#8BC34A'
     },
 
-    // Wrapper gradients
-    wrapperGradients: {
-        1: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        2: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-        3: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
+    // Wrapper image paths
+    wrapperImages: {
+        1: { thumb: 'assets/wrappers/wrapper01.png', back: 'assets/wrappers/wrapper01-back.png', front: 'assets/wrappers/wrapper01-front.png' },
+        2: { thumb: 'assets/wrappers/wrapper02.png', back: 'assets/wrappers/wrapper02-back.png', front: 'assets/wrappers/wrapper02-front.png' },
+        3: { thumb: 'assets/wrappers/wrapper03.png', back: 'assets/wrappers/wrapper03-back.png', front: 'assets/wrappers/wrapper03-front.png' },
+        4: { thumb: 'assets/wrappers/wrapper04.png', back: 'assets/wrappers/wrapper04-back.png', front: 'assets/wrappers/wrapper04-front.png' },
+        5: { thumb: 'assets/wrappers/wrapper05.png', back: 'assets/wrappers/wrapper05-back.png', front: 'assets/wrappers/wrapper05-front.png' },
+        6: { thumb: 'assets/wrappers/wrapper06.png', back: 'assets/wrappers/wrapper06-back.png', front: 'assets/wrappers/wrapper06-front.png' },
+        7: { thumb: 'assets/wrappers/wrapper07.png', back: 'assets/wrappers/wrapper07-back.png', front: 'assets/wrappers/wrapper07-front.png' },
+        8: { thumb: 'assets/wrappers/wrapper08.png', back: 'assets/wrappers/wrapper08-back.png', front: 'assets/wrappers/wrapper08-front.png' }
     },
 
     // Generate unique ID

@@ -21,13 +21,13 @@ const CanvasManager = {
 
         if (!this.canvas) return;
 
-        // Set initial wrapper
-        this.updateWrapper(BouquetState.wrapper);
-
-        // Render existing flowers
-        this.render();
-
-        if (!readOnly) {
+        if (readOnly) {
+            // For preview/view pages - render layered bouquet
+            this.renderLayeredBouquet();
+        } else {
+            // For landing page - editable canvas
+            this.updateWrapper(BouquetState.wrapper);
+            this.render();
             this.setupDropZone();
             this.setupCanvasEvents();
         }
@@ -296,11 +296,63 @@ const CanvasManager = {
         }
     },
 
-    // Update wrapper background
+    // Update wrapper background (for landing page canvas - uses thumbnail)
     updateWrapper(wrapperId) {
-        if (this.canvas) {
-            this.canvas.style.background = BouquetState.wrapperGradients[wrapperId];
+        if (this.canvas && !this.isReadOnly) {
+            const wrapper = BouquetState.wrapperImages[wrapperId];
+            if (wrapper) {
+                this.canvas.style.backgroundImage = `url('${wrapper.thumb}')`;
+                this.canvas.style.backgroundSize = 'cover';
+                this.canvas.style.backgroundPosition = 'center';
+            }
         }
+    },
+
+    // Render layered bouquet (for preview/view pages)
+    renderLayeredBouquet() {
+        if (!this.canvas || !this.isReadOnly) return;
+
+        const wrapper = BouquetState.wrapperImages[BouquetState.wrapper];
+        if (!wrapper) return;
+
+        // Clear existing content
+        this.canvas.innerHTML = '';
+        this.canvas.style.background = 'transparent';
+        this.canvas.style.position = 'relative';
+
+        // Layer 1: Back wrapper
+        const backLayer = document.createElement('img');
+        backLayer.src = wrapper.back;
+        backLayer.className = 'bouquet-layer bouquet-back';
+        backLayer.alt = 'Wrapper back';
+        this.canvas.appendChild(backLayer);
+
+        // Layer 2: Flowers container
+        const flowersLayer = document.createElement('div');
+        flowersLayer.className = 'bouquet-layer bouquet-flowers';
+
+        // Add flowers
+        BouquetState.flowers.forEach(flower => {
+            const elem = document.createElement('div');
+            elem.className = 'placed-flower';
+            elem.style.background = BouquetState.flowerColors[flower.type];
+            elem.style.left = `${flower.x - 25}px`;
+            elem.style.top = `${flower.y - 25}px`;
+
+            const rotation = flower.rotation || 0;
+            const scale = flower.scale || 1;
+            elem.style.transform = `rotate(${rotation}deg) scale(${scale})`;
+
+            flowersLayer.appendChild(elem);
+        });
+        this.canvas.appendChild(flowersLayer);
+
+        // Layer 3: Front wrapper
+        const frontLayer = document.createElement('img');
+        frontLayer.src = wrapper.front;
+        frontLayer.className = 'bouquet-layer bouquet-front';
+        frontLayer.alt = 'Wrapper front';
+        this.canvas.appendChild(frontLayer);
     },
 
     // Render all flowers from state
