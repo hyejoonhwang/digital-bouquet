@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Bouquet</title>
-    <link rel="stylesheet" href="css/styles.css?v=32">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=33">
 </head>
 <body>
     <div class="app landing-page">
         <!-- Header - just create button -->
         <header class="header header-minimal">
-            <button class="btn btn-primary" id="createBtn">create</button>
+            <button class="btn-img" id="createBtn"><img src="assets/buttons/create-button.png" alt="Create"></button>
         </header>
 
         <!-- Main Content - Canvas centered -->
@@ -36,8 +39,8 @@
         <footer class="bottom-panel">
             <!-- Tabs -->
             <div class="tabs">
-                <button class="tab active" data-tab="flowers">flower</button>
-                <button class="tab" data-tab="wrapper">wrapper</button>
+                <button class="tab-img active" data-tab="flowers"><img src="assets/buttons/flower-palette.png" alt="Flowers"></button>
+                <button class="tab-img" data-tab="wrapper"><img src="assets/buttons/wrapper-palette.png" alt="Wrapper"></button>
             </div>
 
             <!-- Palette Container -->
@@ -77,8 +80,8 @@
         </footer>
     </div>
 
-    <script src="js/state.js?v=32"></script>
-    <script src="js/canvas.js?v=32"></script>
-    <script src="js/app.js?v=32"></script>
+    <script src="js/state.js?v=33"></script>
+    <script src="js/canvas.js?v=33"></script>
+    <script src="js/app.js?v=33"></script>
 </body>
 </html>

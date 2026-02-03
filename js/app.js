@@ -133,7 +133,7 @@ function setupWrapperPalette() {
 }
 
 function setupTabs() {
-    const tabs = document.querySelectorAll('.tab');
+    const tabs = document.querySelectorAll('.tab-img');
     const flowersPalette = document.getElementById('flowersPalette');
     const wrapperPalette = document.getElementById('wrapperPalette');
 

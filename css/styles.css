@@ -26,12 +26,60 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-family: 'Josefin Slab', serif;
     background: url('../assets/background.png') no-repeat center center fixed;
     background-size: cover;
     color: var(--text-primary);
     min-height: 100vh;
     overflow-x: hidden;
+}
+
+/* Image Buttons */
+.btn-img {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-img:hover {
+    transform: scale(1.05);
+}
+
+.btn-img:active {
+    transform: scale(0.98);
+}
+
+.btn-img img {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+/* Tab Image Buttons */
+.tab-img {
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    opacity: 0.6;
+}
+
+.tab-img:hover {
+    transform: scale(1.05);
+    opacity: 0.8;
+}
+
+.tab-img.active {
+    opacity: 1;
+}
+
+.tab-img img {
+    height: 28px;
+    width: auto;
+    display: block;
 }
 
 /* App Container */
