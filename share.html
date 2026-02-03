@@ -4,48 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Bouquet - Share Your Gift</title>
-    <link rel="stylesheet" href="css/styles.css?v=18">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=19">
 </head>
 <body>
     <div class="app">
         <!-- Header -->
         <header class="header">
-            <div class="logo">🌸 Digital Bouquet</div>
-            <button class="btn btn-primary" id="newBouquetBtn">Create Another</button>
+            <button class="btn btn-secondary" id="newBouquetBtn">Create Another</button>
+            <div class="logo"></div>
+            <div class="share-link-header">
+                <input type="text" class="link-input" id="shareLink" readonly>
+                <button class="btn btn-primary" id="copyBtn">Copy Link</button>
+            </div>
         </header>
 
+        <div class="copy-feedback hidden" id="copyFeedback">✓ Link copied to clipboard!</div>
+
         <!-- Main Content -->
-        <main class="share-content">
-            <div class="share-container">
-                <div class="success-icon">🎉</div>
-                <h2>Your bouquet is ready to send!</h2>
-                <p class="share-description">Copy this link and share it with your friend:</p>
-
-                <div class="link-container">
-                    <input type="text" class="link-input" id="shareLink" readonly>
-                    <button class="btn btn-primary" id="copyBtn">📋 Copy</button>
+        <main class="letter-content">
+            <div class="letter-container">
+                <!-- Bouquet Preview -->
+                <div class="preview-section no-border">
+                    <div class="canvas preview-canvas" id="miniCanvas"></div>
                 </div>
 
-                <div class="copy-feedback hidden" id="copyFeedback">✓ Link copied to clipboard!</div>
-
-                <div class="share-note">
-                    <p>📌 This link will expire in 7 days</p>
-                </div>
-
-                <!-- Preview of what was sent -->
-                <div class="sent-preview">
-                    <h3>What you're sending:</h3>
-                    <div class="mini-preview">
-                        <div class="canvas mini-canvas" id="miniCanvas"></div>
+                <!-- Letter Preview -->
+                <div class="letter-section no-border">
+                    <div class="letter-envelope-container">
+                        <img src="assets/envelope-open.png" alt="Letter" class="letter-bg">
+                        <div class="letter-preview-text" id="letterPreview"></div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <script src="js/state.js?v=18"></script>
-    <script src="js/canvas.js?v=18"></script>
-    <script src="js/firebase.js?v=18"></script>
-    <script src="js/app.js?v=18"></script>
+    <script src="js/state.js?v=19"></script>
+    <script src="js/canvas.js?v=19"></script>
+    <script src="js/firebase.js?v=19"></script>
+    <script src="js/app.js?v=19"></script>
 </body>
 </html>

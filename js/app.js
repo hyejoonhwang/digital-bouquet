@@ -315,6 +315,12 @@ function initSharePage() {
         CanvasManager.init(miniCanvas, true);
     }
 
+    // Display letter content
+    const letterPreview = document.getElementById('letterPreview');
+    if (letterPreview) {
+        letterPreview.textContent = BouquetState.letter || '';
+    }
+
     // Generate and display share link
     const shareLink = document.getElementById('shareLink');
     const shareUrl = FirebaseService.getShareUrl(shareId);

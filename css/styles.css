@@ -71,6 +71,21 @@ body {
     display: none;
 }
 
+/* Share link in header */
+.share-link-header {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.share-link-header .link-input {
+    width: 250px;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+}
+
 /* Buttons */
 .btn {
     padding: 10px 20px;
