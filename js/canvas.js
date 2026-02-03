@@ -327,27 +327,35 @@ const CanvasManager = {
         backLayer.alt = 'Wrapper back';
         this.canvas.appendChild(backLayer);
 
-        // Layer 2: Flowers container
+        // Layer 2: Flowers container - centered cluster
         const flowersLayer = document.createElement('div');
         flowersLayer.className = 'bouquet-layer bouquet-flowers';
 
-        // Add flowers
-        BouquetState.flowers.forEach(flower => {
+        // Arrange flowers in a centered cluster pattern
+        const flowerCount = BouquetState.flowers.length;
+        BouquetState.flowers.forEach((flower, index) => {
             const elem = document.createElement('div');
-            elem.className = 'placed-flower';
+            elem.className = 'placed-flower bouquet-flower';
             elem.style.background = BouquetState.flowerColors[flower.type];
-            elem.style.left = `${flower.x - 25}px`;
-            elem.style.top = `${flower.y - 25}px`;
+
+            // Calculate position in a cluster (spread around center)
+            const angle = (index / flowerCount) * Math.PI * 2 + Math.random() * 0.5;
+            const radius = 20 + (index % 3) * 25 + Math.random() * 15;
+            const offsetX = Math.cos(angle) * radius;
+            const offsetY = Math.sin(angle) * radius * 0.6; // Flatten vertically
+
+            elem.style.left = `calc(50% + ${offsetX}px)`;
+            elem.style.top = `calc(35% + ${offsetY}px)`;
 
             const rotation = flower.rotation || 0;
             const scale = flower.scale || 1;
-            elem.style.transform = `rotate(${rotation}deg) scale(${scale})`;
+            elem.style.transform = `translate(-50%, -50%) rotate(${rotation}deg) scale(${scale})`;
 
             flowersLayer.appendChild(elem);
         });
         this.canvas.appendChild(flowersLayer);
 
-        // Layer 3: Front wrapper
+        // Layer 3: Front wrapper - positioned at bottom
         const frontLayer = document.createElement('img');
         frontLayer.src = wrapper.front;
         frontLayer.className = 'bouquet-layer bouquet-front';
