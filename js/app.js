@@ -174,11 +174,6 @@ function setupActionButtons() {
             CanvasManager.render();
         }
     });
-
-    // Download button
-    document.getElementById('downloadBtn').addEventListener('click', () => {
-        downloadBouquet('canvas');
-    });
 }
 
 // Download bouquet as PNG

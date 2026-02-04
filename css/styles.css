@@ -254,6 +254,12 @@ body {
     background: #f0f0f0;
 }
 
+.icon-btn img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
 /* Palette Container */
 .palette-container {
     border: 1px solid var(--border-color);
