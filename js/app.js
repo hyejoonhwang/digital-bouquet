@@ -174,6 +174,34 @@ function setupActionButtons() {
             CanvasManager.render();
         }
     });
+
+    // Download button
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+        downloadBouquet('canvas');
+    });
+}
+
+// Download bouquet as PNG
+async function downloadBouquet(canvasId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+
+    try {
+        const downloadCanvas = await html2canvas(canvas, {
+            backgroundColor: null,
+            scale: 2,
+            useCORS: true,
+            allowTaint: true
+        });
+
+        const link = document.createElement('a');
+        link.download = 'my-bouquet.png';
+        link.href = downloadCanvas.toDataURL('image/png');
+        link.click();
+    } catch (error) {
+        console.error('Error downloading bouquet:', error);
+        alert('Could not download the bouquet. Please try again.');
+    }
 }
 
 function setupKeyboardShortcuts() {
@@ -348,6 +376,11 @@ function initSharePage() {
         sessionStorage.removeItem('shareId');
         window.location.href = 'index.html';
     });
+
+    // Download button
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+        downloadBouquet('miniCanvas');
+    });
 }
 
 // ===== VIEW PAGE (Receiver) =====
@@ -403,6 +436,11 @@ function setupEnvelope() {
     // Create own button
     document.getElementById('createOwnBtn').addEventListener('click', () => {
         window.location.href = 'index.html';
+    });
+
+    // Download button (on revealed view)
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+        downloadBouquet('revealedCanvas');
     });
 }
 
