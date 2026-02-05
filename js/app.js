@@ -2,26 +2,26 @@
  * Main Application Logic for Digital Bouquet
  */
 
-// Determine current page
-const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+// Determine current page (strip .html for compatibility with clean URLs)
+const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
 
 // Initialize based on current page
 document.addEventListener('DOMContentLoaded', () => {
     switch (currentPage) {
-        case 'index.html':
+        case 'index':
         case '':
             initIndexPage();
             break;
-        case 'letter.html':
+        case 'letter':
             initLetterPage();
             break;
-        case 'preview.html':
+        case 'preview':
             initPreviewPage();
             break;
-        case 'share.html':
+        case 'share':
             initSharePage();
             break;
-        case 'view.html':
+        case 'view':
             initViewPage();
             break;
     }
@@ -176,6 +176,24 @@ function setupActionButtons() {
     });
 }
 
+// Helper to trigger download from a canvas element
+function triggerCanvasDownload(canvas, filename) {
+    canvas.toBlob((blob) => {
+        if (!blob) {
+            alert('Could not generate the image. Please try again.');
+            return;
+        }
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = filename;
+        link.href = url;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }, 'image/png');
+}
+
 // Download bouquet as PNG
 async function downloadBouquet(canvasId) {
     const canvas = document.getElementById(canvasId);
@@ -185,17 +203,50 @@ async function downloadBouquet(canvasId) {
         const downloadCanvas = await html2canvas(canvas, {
             backgroundColor: null,
             scale: 2,
-            useCORS: true,
-            allowTaint: true
+            useCORS: true
         });
-
-        const link = document.createElement('a');
-        link.download = 'my-bouquet.png';
-        link.href = downloadCanvas.toDataURL('image/png');
-        link.click();
+        triggerCanvasDownload(downloadCanvas, 'my-bouquet.png');
     } catch (error) {
         console.error('Error downloading bouquet:', error);
         alert('Could not download the bouquet. Please try again.');
+    }
+}
+
+// Download full page with bouquet, letter, and background
+async function downloadFullPage() {
+    // Collect all UI elements to hide (buttons, share actions, headers)
+    const elementsToHide = document.querySelectorAll('.share-actions, .header, .char-count');
+    const originalDisplay = [];
+
+    try {
+        // Hide all UI elements by setting display:none so space collapses
+        elementsToHide.forEach((el, i) => {
+            originalDisplay[i] = el.style.display;
+            el.style.display = 'none';
+        });
+
+        // Capture the full page with background
+        const downloadCanvas = await html2canvas(document.body, {
+            backgroundColor: null,
+            scale: 2,
+            useCORS: true,
+            width: document.body.scrollWidth,
+            height: document.body.scrollHeight
+        });
+
+        // Restore all hidden elements
+        elementsToHide.forEach((el, i) => {
+            el.style.display = originalDisplay[i];
+        });
+
+        triggerCanvasDownload(downloadCanvas, 'my-bouquet-gift.png');
+    } catch (error) {
+        console.error('Error downloading page:', error);
+        // Restore all hidden elements on error
+        elementsToHide.forEach((el, i) => {
+            el.style.display = originalDisplay[i];
+        });
+        alert('Could not download the image. Please try again.');
     }
 }
 
@@ -260,15 +311,36 @@ function initLetterPage() {
         window.location.href = 'index.html';
     });
 
-    // Send button
-    document.getElementById('sendBtn').addEventListener('click', () => {
+    // Send button - save to Firebase and go to share page
+    document.getElementById('sendBtn').addEventListener('click', async () => {
         if (!letterText.value.trim()) {
             if (!confirm('Your letter is empty. Send anyway?')) {
                 return;
             }
         }
-        BouquetState.saveToStorage();
-        window.location.href = 'preview.html';
+
+        const btn = document.getElementById('sendBtn');
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+
+        try {
+            BouquetState.saveToStorage();
+            const result = await FirebaseService.saveBouquet(BouquetState.getState());
+
+            if (result.success) {
+                sessionStorage.setItem('shareId', result.id);
+                window.location.href = 'share.html';
+            } else {
+                alert('Failed to save bouquet. Please try again.');
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            }
+        } catch (error) {
+            console.error('Save error:', error);
+            alert('Failed to save bouquet. Please try again.');
+            btn.disabled = false;
+            btn.style.opacity = '1';
+        }
     });
 }
 
@@ -372,9 +444,9 @@ function initSharePage() {
         window.location.href = 'index.html';
     });
 
-    // Download button
+    // Download button - captures full page with bouquet, letter, and background
     document.getElementById('downloadBtn').addEventListener('click', () => {
-        downloadBouquet('miniCanvas');
+        downloadFullPage();
     });
 }
 
@@ -433,9 +505,9 @@ function setupEnvelope() {
         window.location.href = 'index.html';
     });
 
-    // Download button (on revealed view)
+    // Download button (on revealed view) - captures full page with bouquet, letter, and background
     document.getElementById('downloadBtn').addEventListener('click', () => {
-        downloadBouquet('revealedCanvas');
+        downloadFullPage();
     });
 }
 
