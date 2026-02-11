@@ -67,7 +67,12 @@ function setupFlowerPalette() {
     const flowers = document.querySelectorAll('.palette-item.flower');
     let dragGhost = null;
     let isDragging = false;
+    let isPotentialDrag = false;
     let currentFlowerType = null;
+    let currentFlowerImg = null;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const DRAG_THRESHOLD = 20; // pixels to move before drag starts
 
     flowers.forEach(flower => {
         flower.addEventListener('dragstart', (e) => {
@@ -77,70 +82,94 @@ function setupFlowerPalette() {
 
         // Touch support for mobile with visual drag preview
         flower.addEventListener('touchstart', (e) => {
-            e.preventDefault();
             const touch = e.touches[0];
 
-            // Store flower type
+            // Store starting position and flower info
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
             currentFlowerType = flower.dataset.type;
-            isDragging = true;
-
-            // Create drag ghost
-            dragGhost = document.createElement('div');
-            dragGhost.className = 'drag-ghost';
-            const img = document.createElement('img');
-            img.src = flower.querySelector('img').src;
-            dragGhost.appendChild(img);
-            document.body.appendChild(dragGhost);
-
-            // Position ghost at touch point
-            dragGhost.style.left = `${touch.clientX}px`;
-            dragGhost.style.top = `${touch.clientY}px`;
-        }, { passive: false });
+            currentFlowerImg = flower.querySelector('img').src;
+            isPotentialDrag = true;
+            isDragging = false;
+        }, { passive: true });
     });
 
     // Global touch move handler
     document.addEventListener('touchmove', (e) => {
-        if (!isDragging || !dragGhost) return;
+        if (!isPotentialDrag) return;
 
         const touch = e.touches[0];
-        dragGhost.style.left = `${touch.clientX}px`;
-        dragGhost.style.top = `${touch.clientY}px`;
-    }, { passive: true });
+        const deltaX = touch.clientX - touchStartX;
+        const deltaY = touch.clientY - touchStartY;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-    // Global touch end handler
-    document.addEventListener('touchend', (e) => {
-        if (!isDragging || !dragGhost) return;
+        // If not yet dragging, check if we should start
+        if (!isDragging) {
+            // Only start drag if moved enough AND moving more upward than sideways
+            // (toward canvas, not scrolling horizontally)
+            if (distance > DRAG_THRESHOLD && Math.abs(deltaY) > Math.abs(deltaX)) {
+                isDragging = true;
 
-        const touch = e.changedTouches[0];
-        const canvas = document.getElementById('canvas');
-        const rect = canvas.getBoundingClientRect();
-
-        // Remove ghost
-        dragGhost.remove();
-        dragGhost = null;
-        isDragging = false;
-
-        // Check if touch ended over canvas
-        if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
-            touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
-
-            if (BouquetState.isAtLimit()) {
-                CanvasManager.showLimitWarning();
-                return;
-            }
-
-            const x = touch.clientX - rect.left;
-            const y = touch.clientY - rect.top;
-
-            const newFlower = BouquetState.addFlower(parseInt(currentFlowerType), x, y);
-            if (newFlower) {
-                CanvasManager.addFlowerElement(newFlower);
-                CanvasManager.updateFlowerCount();
-                CanvasManager.hidePlaceholder();
+                // Create drag ghost
+                dragGhost = document.createElement('div');
+                dragGhost.className = 'drag-ghost';
+                const img = document.createElement('img');
+                img.src = currentFlowerImg;
+                dragGhost.appendChild(img);
+                document.body.appendChild(dragGhost);
             }
         }
 
+        // If dragging, update ghost position
+        if (isDragging && dragGhost) {
+            e.preventDefault();
+            dragGhost.style.left = `${touch.clientX}px`;
+            dragGhost.style.top = `${touch.clientY}px`;
+        }
+    }, { passive: false });
+
+    // Global touch end handler
+    document.addEventListener('touchend', (e) => {
+        if (!isPotentialDrag) return;
+
+        const touch = e.changedTouches[0];
+
+        // Clean up ghost if it exists
+        if (dragGhost) {
+            dragGhost.remove();
+            dragGhost = null;
+        }
+
+        // If we were dragging, try to place flower
+        if (isDragging) {
+            const canvas = document.getElementById('canvas');
+            const rect = canvas.getBoundingClientRect();
+
+            // Check if touch ended over canvas
+            if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+                touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+
+                if (BouquetState.isAtLimit()) {
+                    CanvasManager.showLimitWarning();
+                } else {
+                    const x = touch.clientX - rect.left;
+                    const y = touch.clientY - rect.top;
+
+                    const newFlower = BouquetState.addFlower(parseInt(currentFlowerType), x, y);
+                    if (newFlower) {
+                        CanvasManager.addFlowerElement(newFlower);
+                        CanvasManager.updateFlowerCount();
+                        CanvasManager.hidePlaceholder();
+                    }
+                }
+            }
+        }
+
+        // Reset state
+        isPotentialDrag = false;
+        isDragging = false;
         currentFlowerType = null;
+        currentFlowerImg = null;
     });
 }
 
