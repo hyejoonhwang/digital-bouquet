@@ -178,8 +178,8 @@ body {
 .landing-page {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    overflow-y: auto;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .landing-page .main-content {
@@ -187,32 +187,33 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
+    overflow: hidden;
 }
 
 /* Palette panel inside canvas area */
 .palette-panel {
-    margin-top: 16px;
+    margin-top: 8px;
 }
 
 .palette-panel .tabs {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 .canvas-area {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    margin-top: -20px;
+    gap: 8px;
+    max-height: 100%;
 }
 
 /* Canvas Container */
 .canvas-container {
-    width: min(calc(100vh - 300px), calc(100vw - 40px)) !important;
-    height: min(calc(100vh - 300px), calc(100vw - 40px)) !important;
-    min-width: min(500px, calc(100vw - 40px)) !important;
-    min-height: min(500px, calc(100vw - 40px)) !important;
+    width: min(calc(100vh - 280px), calc(100vw - 40px)) !important;
+    height: min(calc(100vh - 280px), calc(100vw - 40px)) !important;
+    min-width: min(400px, calc(100vw - 40px)) !important;
+    min-height: min(400px, calc(100vw - 40px)) !important;
     max-width: 1500px;
     max-height: 1500px;
 }
@@ -370,8 +371,18 @@ body {
 }
 
 .drag-ghost img {
-    height: 120px;
+    height: 100px;
     width: auto;
+}
+
+/* Prevent scroll when dragging */
+body.is-dragging {
+    overflow: hidden;
+    touch-action: none;
+}
+
+body.is-dragging * {
+    touch-action: none;
 }
 
 /* Bottom Panel */
@@ -1076,12 +1087,12 @@ body {
     }
 
     .canvas-container {
-        width: calc(100vw - 40px) !important;
-        height: calc(100vw - 40px) !important;
-        min-width: 300px !important;
-        min-height: 300px !important;
-        max-width: 500px !important;
-        max-height: 500px !important;
+        width: min(calc(100vh - 320px), calc(100vw - 40px)) !important;
+        height: min(calc(100vh - 320px), calc(100vw - 40px)) !important;
+        min-width: 250px !important;
+        min-height: 250px !important;
+        max-width: 450px !important;
+        max-height: 450px !important;
     }
 
     .panel-header {
@@ -1090,24 +1101,28 @@ body {
     }
 
     .palette-item {
-        width: 60px;
-        height: 80px;
+        width: 55px;
+        height: 70px;
     }
 
     .palette-item.wrapper {
-        width: 60px;
-        height: 80px;
+        width: 55px;
+        height: 70px;
     }
 
     .flower-img {
-        height: 140px;
+        height: 120px;
+    }
+
+    .palette-container {
+        padding: 10px;
     }
 }
 
 /* Mobile */
 @media (max-width: 480px) {
     .header {
-        padding: 10px 12px;
+        padding: 8px 12px;
     }
 
     .logo {
@@ -1120,11 +1135,11 @@ body {
     }
 
     .main-content {
-        padding: 12px;
+        padding: 8px;
     }
 
     .bottom-panel {
-        padding: 12px 16px;
+        padding: 10px 12px;
     }
 
     .canvas-area {
@@ -1132,17 +1147,21 @@ body {
     }
 
     .canvas-container {
-        width: calc(100vw - 30px) !important;
-        height: calc(100vw - 30px) !important;
-        min-width: 280px !important;
-        min-height: 280px !important;
-        max-width: 400px !important;
-        max-height: 400px !important;
+        width: min(calc(100vh - 300px), calc(100vw - 20px)) !important;
+        height: min(calc(100vh - 300px), calc(100vw - 20px)) !important;
+        min-width: 200px !important;
+        min-height: 200px !important;
+        max-width: 350px !important;
+        max-height: 350px !important;
     }
 
     .palette-container {
-        width: calc(100vw - 24px);
-        padding: 12px;
+        width: calc(100vw - 16px);
+        padding: 8px;
+    }
+
+    .palette-panel {
+        margin-top: 4px;
     }
 
     .tabs {
@@ -1173,34 +1192,40 @@ body {
     }
 
     .palette {
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .palette-item {
-        width: 50px;
-        height: 70px;
+        width: 45px;
+        min-width: 45px;
+        height: 60px;
     }
 
     .palette-item.wrapper {
-        width: 50px;
-        height: 70px;
+        width: 45px;
+        min-width: 45px;
+        height: 60px;
     }
 
     .flower-img {
-        height: 100px;
+        height: 90px;
     }
 
     .placed-flower .delete-btn,
     .placed-flower .transform-btn {
-        width: 28px;
-        height: 28px;
-        font-size: 16px;
+        width: 26px;
+        height: 26px;
+        font-size: 14px;
     }
 
     .icon-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 1rem;
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+
+    .action-icons {
+        gap: 8px;
     }
 
     .gift-title {

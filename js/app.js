@@ -110,6 +110,9 @@ function setupFlowerPalette() {
             if (distance > DRAG_THRESHOLD && Math.abs(deltaY) > Math.abs(deltaX)) {
                 isDragging = true;
 
+                // Prevent page scroll during drag
+                document.body.classList.add('is-dragging');
+
                 // Create drag ghost
                 dragGhost = document.createElement('div');
                 dragGhost.className = 'drag-ghost';
@@ -139,6 +142,9 @@ function setupFlowerPalette() {
             dragGhost.remove();
             dragGhost = null;
         }
+
+        // Re-enable page scroll
+        document.body.classList.remove('is-dragging');
 
         // If we were dragging, try to place flower
         if (isDragging) {
