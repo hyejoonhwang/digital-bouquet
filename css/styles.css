@@ -1256,16 +1256,16 @@ body.is-dragging * {
     .letter-content:has(.share-actions) .letter-section {
         width: 100% !important;
         max-width: 100%;
-        max-height: 32vh;
+        max-height: 38vh;
     }
 
     .letter-content:has(.share-actions) .preview-canvas {
-        max-height: 28vh;
+        max-height: 34vh;
     }
 
     .letter-content:has(.share-actions) .letter-envelope-container,
     .letter-content:has(.share-actions) .letter-bg {
-        max-height: 28vh;
+        max-height: 32vh;
     }
 
     .share-actions {
