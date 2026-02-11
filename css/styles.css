@@ -178,8 +178,8 @@ body {
 .landing-page {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow-y: auto;
 }
 
 .landing-page .main-content {
@@ -187,6 +187,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+}
+
+/* Palette panel inside canvas area */
+.palette-panel {
+    margin-top: 16px;
+}
+
+.palette-panel .tabs {
+    margin-bottom: 8px;
 }
 
 .canvas-area {
@@ -199,10 +209,10 @@ body {
 
 /* Canvas Container */
 .canvas-container {
-    width: calc(100vh - 300px) !important;
-    height: calc(100vh - 300px) !important;
-    min-width: 500px !important;
-    min-height: 500px !important;
+    width: min(calc(100vh - 300px), calc(100vw - 40px)) !important;
+    height: min(calc(100vh - 300px), calc(100vw - 40px)) !important;
+    min-width: min(500px, calc(100vw - 40px)) !important;
+    min-height: min(500px, calc(100vw - 40px)) !important;
     max-width: 1500px;
     max-height: 1500px;
 }
@@ -267,6 +277,7 @@ body {
     padding: 16px;
     max-width: 100%;
     overflow: hidden;
+    width: min(600px, calc(100vw - 40px));
 }
 
 
@@ -275,12 +286,16 @@ body {
     position: absolute;
     cursor: move;
     transition: box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .flower-img {
     height: 200px;
     width: auto;
     pointer-events: none;
+    display: block;
 }
 
 .placed-flower:hover {
@@ -294,20 +309,22 @@ body {
 
 .placed-flower .delete-btn {
     position: absolute;
-    top: -8px;
-    right: -8px;
-    width: 20px;
-    height: 20px;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    width: 24px;
+    height: 24px;
     background: #ff4444;
     color: white;
-    border: none;
+    border: 2px solid white;
     border-radius: 50%;
-    font-size: 12px;
+    font-size: 14px;
     cursor: pointer;
     display: none;
     align-items: center;
     justify-content: center;
     line-height: 1;
+    z-index: 10;
 }
 
 .placed-flower.selected .delete-btn {
@@ -317,20 +334,22 @@ body {
 /* Transform button (rotation/resize) - bottom left */
 .placed-flower .transform-btn {
     position: absolute;
-    bottom: -8px;
-    left: -8px;
-    width: 20px;
-    height: 20px;
+    bottom: 0;
+    left: 0;
+    transform: translate(-50%, 50%);
+    width: 24px;
+    height: 24px;
     background: #4D96FF;
     color: white;
-    border: none;
+    border: 2px solid white;
     border-radius: 50%;
-    font-size: 12px;
+    font-size: 14px;
     cursor: grab;
     display: none;
     align-items: center;
     justify-content: center;
     line-height: 1;
+    z-index: 10;
 }
 
 .placed-flower .transform-btn:active {
@@ -341,6 +360,20 @@ body {
     display: flex;
 }
 
+/* Drag ghost for touch drag preview */
+.drag-ghost {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.8;
+    transform: translate(-50%, -50%);
+}
+
+.drag-ghost img {
+    height: 120px;
+    width: auto;
+}
+
 /* Bottom Panel */
 .bottom-panel {
     background: var(--surface);
@@ -348,13 +381,7 @@ body {
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Landing page bottom panel - at the bottom */
-.landing-page .bottom-panel {
-    background: transparent;
-    box-shadow: none;
-    padding: 16px 24px 24px;
-}
-
+/* Landing page tabs */
 .landing-page .tabs {
     margin-bottom: 8px;
 }
@@ -470,6 +497,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    touch-action: none;
 }
 
 .palette-item.flower img {
@@ -516,6 +544,26 @@ body {
     z-index: 2;
     pointer-events: none;
     overflow: visible;
+    transform-origin: center 40%;
+}
+
+/* Scale the entire flower cluster on smaller screens */
+@media (max-width: 768px) {
+    .bouquet-flowers {
+        transform: scale(0.7);
+    }
+}
+
+@media (max-width: 480px) {
+    .bouquet-flowers {
+        transform: scale(0.5);
+    }
+}
+
+@media (max-width: 320px) {
+    .bouquet-flowers {
+        transform: scale(0.4);
+    }
 }
 
 .bouquet-flowers .placed-flower {
@@ -524,8 +572,8 @@ body {
 }
 
 .bouquet-flower .flower-img {
-    height: 200px !important;
-    width: auto !important;
+    height: 200px;
+    width: auto;
 }
 
 .bouquet-front {
@@ -727,6 +775,48 @@ body {
 }
 
 /* ===== SHARE PAGE ===== */
+.share-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+/* Center content vertically on share page */
+.letter-content:has(.share-actions) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+}
+
+.letter-content:has(.share-actions) .letter-container {
+    min-height: auto;
+}
+
+.share-actions .btn-img img {
+    height: 50px;
+}
+
+.share-link-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+}
+
+.share-link-row .link-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    background: var(--surface);
+}
+
 .share-content {
     flex: 1;
     display: flex;
@@ -1010,6 +1100,9 @@ body {
         height: 80px;
     }
 
+    .flower-img {
+        height: 140px;
+    }
 }
 
 /* Mobile */
@@ -1046,6 +1139,11 @@ body {
         min-height: 280px !important;
         max-width: 400px !important;
         max-height: 400px !important;
+    }
+
+    .palette-container {
+        width: calc(100vw - 24px);
+        padding: 12px;
     }
 
     .tabs {
@@ -1089,9 +1187,15 @@ body {
         height: 70px;
     }
 
-    .placed-flower {
-        width: 40px;
-        height: 40px;
+    .flower-img {
+        height: 100px;
+    }
+
+    .placed-flower .delete-btn,
+    .placed-flower .transform-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
     }
 
     .icon-btn {
@@ -1126,10 +1230,5 @@ body {
     .palette-item {
         width: 40px;
         height: 60px;
-    }
-
-    .placed-flower {
-        width: 35px;
-        height: 35px;
     }
 }

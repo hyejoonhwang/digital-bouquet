@@ -7,22 +7,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Josefin+Slab:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=37">
+    <link rel="stylesheet" href="css/styles.css?v=43">
 </head>
 <body>
     <div class="app">
         <!-- Header -->
-        <header class="header">
+        <header class="header header-minimal">
             <button class="btn-img" id="newBouquetBtn"><img src="assets/buttons/create another -button.png" alt="Create Another"></button>
-            <button class="btn-img" id="downloadBtn" title="Download Bouquet"><img src="assets/buttons/download-icon.png" alt="Download"></button>
-            <div class="logo"></div>
-            <div class="share-link-header">
-                <input type="text" class="link-input" id="shareLink" readonly>
-                <button class="btn-img" id="copyBtn"><img src="assets/buttons/copy link.png" alt="Copy Link"></button>
-            </div>
         </header>
-
-        <div class="copy-feedback hidden" id="copyFeedback">✓ Link copied to clipboard!</div>
 
         <!-- Main Content -->
         <main class="letter-content">
@@ -39,6 +31,16 @@
                         <div class="letter-preview-text" id="letterPreview"></div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="share-actions">
+                <button class="btn-img" id="downloadBtn" title="Download Bouquet"><img src="assets/buttons/download-icon.png" alt="Download"></button>
+                <div class="share-link-row">
+                    <input type="text" class="link-input" id="shareLink" readonly>
+                    <button class="btn-img" id="copyBtn"><img src="assets/buttons/copy link.png" alt="Copy Link"></button>
+                </div>
+                <div class="copy-feedback hidden" id="copyFeedback">✓ Link copied to clipboard!</div>
             </div>
         </main>
     </div>

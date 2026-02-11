@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=37">
+    <link rel="stylesheet" href="css/styles.css?v=43">
 </head>
 <body>
     <div class="app landing-page">
@@ -32,57 +32,56 @@
                     <button class="icon-btn" id="shuffleBtn" title="Shuffle">⟳</button>
                     <button class="icon-btn" id="redoBtn" title="Redo">↪</button>
                 </div>
+
+                <!-- Palette Panel (below action buttons) -->
+                <div class="palette-panel">
+                    <!-- Tabs -->
+                    <div class="tabs">
+                        <button class="tab-img active" data-tab="flowers"><img src="assets/buttons/flower-palette.png" alt="Flowers"></button>
+                        <button class="tab-img" data-tab="wrapper"><img src="assets/buttons/wrapper-palette.png" alt="Wrapper"></button>
+                    </div>
+
+                    <!-- Palette Container -->
+                    <div class="palette-container">
+                        <!-- Flowers Palette -->
+                        <div class="palette" id="flowersPalette">
+                            <div class="palette-item flower" data-type="1" draggable="true"><img src="assets/flowers/flower-01.png" alt="Flower 1"></div>
+                            <div class="palette-item flower" data-type="2" draggable="true"><img src="assets/flowers/flower-02.png" alt="Flower 2"></div>
+                            <div class="palette-item flower" data-type="3" draggable="true"><img src="assets/flowers/flower-03.png" alt="Flower 3"></div>
+                            <div class="palette-item flower" data-type="4" draggable="true"><img src="assets/flowers/flower-04.png" alt="Flower 4"></div>
+                            <div class="palette-item flower" data-type="5" draggable="true"><img src="assets/flowers/flower-05.png" alt="Flower 5"></div>
+                            <div class="palette-item flower" data-type="6" draggable="true"><img src="assets/flowers/flower-06.png" alt="Flower 6"></div>
+                            <div class="palette-item flower" data-type="7" draggable="true"><img src="assets/flowers/flower-07.png" alt="Flower 7"></div>
+                            <div class="palette-item flower" data-type="8" draggable="true"><img src="assets/flowers/flower-08.png" alt="Flower 8"></div>
+                            <div class="palette-item flower" data-type="9" draggable="true"><img src="assets/flowers/flower-09.png" alt="Flower 9"></div>
+                            <div class="palette-item flower" data-type="10" draggable="true"><img src="assets/flowers/flower-10.png" alt="Flower 10"></div>
+                            <div class="palette-item flower" data-type="11" draggable="true"><img src="assets/flowers/flower-11.png" alt="Flower 11"></div>
+                            <div class="palette-item flower" data-type="12" draggable="true"><img src="assets/flowers/flower-12.png" alt="Flower 12"></div>
+                            <div class="palette-item flower" data-type="13" draggable="true"><img src="assets/flowers/flower-13.png" alt="Flower 13"></div>
+                            <div class="palette-item flower" data-type="14" draggable="true"><img src="assets/flowers/filler-01.png" alt="Filler"></div>
+                            <div class="palette-item flower" data-type="15" draggable="true"><img src="assets/flowers/green-01.png" alt="Greenery"></div>
+                        </div>
+
+                        <!-- Wrapper Palette -->
+                        <div class="palette hidden" id="wrapperPalette">
+                            <div class="palette-item wrapper" data-wrapper="1" style="background-image: url('assets/wrappers/wrapper01.png');"></div>
+                            <div class="palette-item wrapper" data-wrapper="2" style="background-image: url('assets/wrappers/wrapper02.png');"></div>
+                            <div class="palette-item wrapper" data-wrapper="3" style="background-image: url('assets/wrappers/wrapper03.png');"></div>
+                            <div class="palette-item wrapper" data-wrapper="4" style="background-image: url('assets/wrappers/wrapper04.png');"></div>
+                            <div class="palette-item wrapper" data-wrapper="5" style="background-image: url('assets/wrappers/wrapper05.png');"></div>
+                            <div class="palette-item wrapper" data-wrapper="6" style="background-image: url('assets/wrappers/wrapper06.png');"></div>
+                            <div class="palette-item wrapper" data-wrapper="7" style="background-image: url('assets/wrappers/wrapper07.png');"></div>
+                            <div class="palette-item wrapper" data-wrapper="8" style="background-image: url('assets/wrappers/wrapper08.png');"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
-
-        <!-- Bottom Panel - Fixed at bottom -->
-        <footer class="bottom-panel">
-            <!-- Tabs -->
-            <div class="tabs">
-                <button class="tab-img active" data-tab="flowers"><img src="assets/buttons/flower-palette.png" alt="Flowers"></button>
-                <button class="tab-img" data-tab="wrapper"><img src="assets/buttons/wrapper-palette.png" alt="Wrapper"></button>
-            </div>
-
-            <!-- Palette Container -->
-            <div class="palette-container">
-                <!-- Flowers Palette -->
-                <div class="palette" id="flowersPalette">
-                    <div class="palette-item flower" data-type="1" draggable="true"><img src="assets/flowers/flower-01.png" alt="Flower 1"></div>
-                    <div class="palette-item flower" data-type="2" draggable="true"><img src="assets/flowers/flower-02.png" alt="Flower 2"></div>
-                    <div class="palette-item flower" data-type="3" draggable="true"><img src="assets/flowers/flower-03.png" alt="Flower 3"></div>
-                    <div class="palette-item flower" data-type="4" draggable="true"><img src="assets/flowers/flower-04.png" alt="Flower 4"></div>
-                    <div class="palette-item flower" data-type="5" draggable="true"><img src="assets/flowers/flower-05.png" alt="Flower 5"></div>
-                    <div class="palette-item flower" data-type="6" draggable="true"><img src="assets/flowers/flower-06.png" alt="Flower 6"></div>
-                    <div class="palette-item flower" data-type="7" draggable="true"><img src="assets/flowers/flower-07.png" alt="Flower 7"></div>
-                    <div class="palette-item flower" data-type="8" draggable="true"><img src="assets/flowers/flower-08.png" alt="Flower 8"></div>
-                    <div class="palette-item flower" data-type="9" draggable="true"><img src="assets/flowers/flower-09.png" alt="Flower 9"></div>
-                    <div class="palette-item flower" data-type="10" draggable="true"><img src="assets/flowers/flower-10.png" alt="Flower 10"></div>
-                    <div class="palette-item flower" data-type="11" draggable="true"><img src="assets/flowers/flower-11.png" alt="Flower 11"></div>
-                    <div class="palette-item flower" data-type="12" draggable="true"><img src="assets/flowers/flower-12.png" alt="Flower 12"></div>
-                    <div class="palette-item flower" data-type="13" draggable="true"><img src="assets/flowers/flower-13.png" alt="Flower 13"></div>
-                    <div class="palette-item flower" data-type="14" draggable="true"><img src="assets/flowers/filler-01.png" alt="Filler"></div>
-                    <div class="palette-item flower" data-type="15" draggable="true"><img src="assets/flowers/green-01.png" alt="Greenery"></div>
-                </div>
-
-                <!-- Wrapper Palette -->
-                <div class="palette hidden" id="wrapperPalette">
-                    <div class="palette-item wrapper" data-wrapper="1" style="background-image: url('assets/wrappers/wrapper01.png');"></div>
-                    <div class="palette-item wrapper" data-wrapper="2" style="background-image: url('assets/wrappers/wrapper02.png');"></div>
-                    <div class="palette-item wrapper" data-wrapper="3" style="background-image: url('assets/wrappers/wrapper03.png');"></div>
-                    <div class="palette-item wrapper" data-wrapper="4" style="background-image: url('assets/wrappers/wrapper04.png');"></div>
-                    <div class="palette-item wrapper" data-wrapper="5" style="background-image: url('assets/wrappers/wrapper05.png');"></div>
-                    <div class="palette-item wrapper" data-wrapper="6" style="background-image: url('assets/wrappers/wrapper06.png');"></div>
-                    <div class="palette-item wrapper" data-wrapper="7" style="background-image: url('assets/wrappers/wrapper07.png');"></div>
-                    <div class="palette-item wrapper" data-wrapper="8" style="background-image: url('assets/wrappers/wrapper08.png');"></div>
-                </div>
-
-            </div>
-        </footer>
     </div>
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="js/state.js?v=36"></script>
-    <script src="js/canvas.js?v=36"></script>
-    <script src="js/app.js?v=36"></script>
+    <script src="js/state.js?v=37"></script>
+    <script src="js/canvas.js?v=37"></script>
+    <script src="js/app.js?v=37"></script>
 </body>
 </html>

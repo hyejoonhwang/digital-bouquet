@@ -65,6 +65,9 @@ function initIndexPage() {
 
 function setupFlowerPalette() {
     const flowers = document.querySelectorAll('.palette-item.flower');
+    let dragGhost = null;
+    let isDragging = false;
+    let currentFlowerType = null;
 
     flowers.forEach(flower => {
         flower.addEventListener('dragstart', (e) => {
@@ -72,38 +75,72 @@ function setupFlowerPalette() {
             e.dataTransfer.effectAllowed = 'copy';
         });
 
-        // Touch support for mobile
+        // Touch support for mobile with visual drag preview
         flower.addEventListener('touchstart', (e) => {
+            e.preventDefault();
             const touch = e.touches[0];
-            flower.dataset.touchStartX = touch.clientX;
-            flower.dataset.touchStartY = touch.clientY;
-        });
 
-        flower.addEventListener('touchend', (e) => {
-            const touch = e.changedTouches[0];
-            const canvas = document.getElementById('canvas');
-            const rect = canvas.getBoundingClientRect();
+            // Store flower type
+            currentFlowerType = flower.dataset.type;
+            isDragging = true;
 
-            // Check if touch ended over canvas
-            if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
-                touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+            // Create drag ghost
+            dragGhost = document.createElement('div');
+            dragGhost.className = 'drag-ghost';
+            const img = document.createElement('img');
+            img.src = flower.querySelector('img').src;
+            dragGhost.appendChild(img);
+            document.body.appendChild(dragGhost);
 
-                if (BouquetState.isAtLimit()) {
-                    CanvasManager.showLimitWarning();
-                    return;
-                }
+            // Position ghost at touch point
+            dragGhost.style.left = `${touch.clientX}px`;
+            dragGhost.style.top = `${touch.clientY}px`;
+        }, { passive: false });
+    });
 
-                const x = touch.clientX - rect.left;
-                const y = touch.clientY - rect.top;
+    // Global touch move handler
+    document.addEventListener('touchmove', (e) => {
+        if (!isDragging || !dragGhost) return;
 
-                const newFlower = BouquetState.addFlower(parseInt(flower.dataset.type), x, y);
-                if (newFlower) {
-                    CanvasManager.addFlowerElement(newFlower);
-                    CanvasManager.updateFlowerCount();
-                    CanvasManager.hidePlaceholder();
-                }
+        const touch = e.touches[0];
+        dragGhost.style.left = `${touch.clientX}px`;
+        dragGhost.style.top = `${touch.clientY}px`;
+    }, { passive: true });
+
+    // Global touch end handler
+    document.addEventListener('touchend', (e) => {
+        if (!isDragging || !dragGhost) return;
+
+        const touch = e.changedTouches[0];
+        const canvas = document.getElementById('canvas');
+        const rect = canvas.getBoundingClientRect();
+
+        // Remove ghost
+        dragGhost.remove();
+        dragGhost = null;
+        isDragging = false;
+
+        // Check if touch ended over canvas
+        if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+            touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+
+            if (BouquetState.isAtLimit()) {
+                CanvasManager.showLimitWarning();
+                return;
             }
-        });
+
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+
+            const newFlower = BouquetState.addFlower(parseInt(currentFlowerType), x, y);
+            if (newFlower) {
+                CanvasManager.addFlowerElement(newFlower);
+                CanvasManager.updateFlowerCount();
+                CanvasManager.hidePlaceholder();
+            }
+        }
+
+        currentFlowerType = null;
     });
 }
 
