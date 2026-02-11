@@ -25,13 +25,21 @@
     --wrapper-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
 
-body {
+html, body {
     font-family: 'Josefin Slab', serif;
     background: url('../assets/background.png') no-repeat center center fixed;
     background-size: cover;
     color: var(--text-primary);
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Allow scroll on non-landing pages */
+html:has(body:not(:has(.landing-page))),
+body:not(:has(.landing-page)) {
+    overflow: auto;
+    height: auto;
     min-height: 100vh;
-    overflow-x: hidden;
 }
 
 /* Image Buttons */
