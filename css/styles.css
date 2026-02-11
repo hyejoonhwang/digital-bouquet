@@ -1248,8 +1248,14 @@ body.is-dragging * {
     }
 
     /* Share page - vertical layout matching letter page */
+    .letter-content:has(.share-actions) .letter-container {
+        flex-direction: column !important;
+    }
+
     .letter-content:has(.share-actions) .preview-section,
     .letter-content:has(.share-actions) .letter-section {
+        width: 100% !important;
+        max-width: 100%;
         max-height: 32vh;
     }
 
