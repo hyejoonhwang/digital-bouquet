@@ -1347,6 +1347,12 @@ body.is-dragging * {
         min-height: 200px;
     }
 
+    /* Smaller font for mobile letter */
+    .letter-envelope-container .letter-textarea,
+    .letter-preview-text {
+        font-size: 0.65rem;
+    }
+
 }
 
 /* Very small screens */
