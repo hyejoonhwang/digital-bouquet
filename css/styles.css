@@ -1247,42 +1247,32 @@ body.is-dragging * {
         margin-bottom: 2px;
     }
 
-    /* Share page - horizontal layout to fit all elements */
-    .letter-content:has(.share-actions) .letter-container {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        gap: 8px;
-        justify-content: center;
-        align-items: center;
-    }
-
+    /* Share page - vertical layout matching letter page */
     .letter-content:has(.share-actions) .preview-section,
     .letter-content:has(.share-actions) .letter-section {
-        width: 48% !important;
-        max-width: 48%;
-        max-height: 55vh;
+        max-height: 32vh;
     }
 
     .letter-content:has(.share-actions) .preview-canvas {
-        max-height: 50vh;
+        max-height: 28vh;
     }
 
     .letter-content:has(.share-actions) .letter-envelope-container,
     .letter-content:has(.share-actions) .letter-bg {
-        max-height: 50vh;
+        max-height: 28vh;
     }
 
     .share-actions {
-        gap: 6px;
-        margin-top: 8px;
+        gap: 5px;
+        margin-top: 5px;
     }
 
     .share-actions .btn-img img {
-        height: 30px;
+        height: 28px;
     }
 
     .share-link-row {
-        max-width: 320px;
+        max-width: 280px;
     }
 
     .share-link-row .link-input {
